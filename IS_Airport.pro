@@ -17,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     authwindow.cpp \
+    databases.cpp \
     main.cpp \
     mainwindow.cpp \
     user.cpp
 
 HEADERS += \
     authwindow.h \
+    databases.h \
     mainwindow.h \
     user.h
 

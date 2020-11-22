@@ -3,6 +3,7 @@
 
 #include <authwindow.h>
 #include <QMainWindow>
+#include <user.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +21,8 @@ public:
     bool authWindowClosed = false;
 
 private:
+    // Текущий пользователь
+    User currentUser;
 
     // Окно авторизации
     AuthWindow authWindow;

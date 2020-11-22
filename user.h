@@ -7,13 +7,13 @@ using namespace std;
 class User
 {
 private:
-    // Логин
+    // Поле логина
     string login;
-    // Пароль
+    // Поле пароля
     string password;
-    // Уникальный идентификатор
+    // Поле уникального идентификатора
     int ID;
-    // Тип: не изв., пассажир, кассир, администратор
+    // Поле типа: не изв., пассажир, кассир, администратор
     int type;
 
 public:
@@ -26,7 +26,8 @@ public:
     string getLogin();
     // Функция возвращает пароль
     string getPassword();
-    // Функция изменяет данные пользователя
+
+    // Функция изменяет данные пользователя на передаваемые password и type
     void changeAuthInfo(string password, int type);
 
     User();

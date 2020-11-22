@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     authWindow.giveFlag(authWindowClosed);
+    authWindow.giveUserPtr(currentUser);
     // Вызов окна авторизации
     authWindow.exec();
    if(!authWindowClosed)
