@@ -2,6 +2,8 @@
 #include "ui_registrywindow.h"
 
 #include <QMessageBox>
+#include <QString>
+#include <QRegularExpression>
 
 RegistryWindow::RegistryWindow(QWidget *parent) :
     QDialog(parent),
@@ -17,15 +19,21 @@ RegistryWindow::~RegistryWindow()
 
 void RegistryWindow::beginRegistry()
 {
+    QMessageBox mBox;
     if(!checkFields())
     {
-        QMessageBox mBox;
         mBox.setWindowTitle(tr("Warning"));
         mBox.setIcon(QMessageBox::Warning);
         mBox.setText(tr("Check if entered data is valid, please"));
         mBox.exec();
     } else
-    QDialog::accept();
+    {
+        mBox.setWindowTitle(tr("Congratulations!"));
+        mBox.setIcon(QMessageBox::Information);
+        mBox.setText(tr("Registry Complete"));
+        mBox.exec();
+        QDialog::accept();
+    }
 }
 
 bool RegistryWindow::checkFields()
@@ -68,16 +76,51 @@ bool RegistryWindow::checkLoginField()
 
 bool RegistryWindow::checkPasswordField()
 {
-    return true;
+    string password = getPasswordFF();
+    if(password.length() < 4 || password.length() > 18) return false;
+    else
+    {
+        // Посимвольная проверка
+        for(int i = 0; i < password.length(); i++)
+        {
+            int charToInt = password[i];
+            if((charToInt < 65 || charToInt > 90)
+               && (charToInt < 97 || charToInt > 122)
+               && (charToInt < 48 || charToInt > 57)
+               && (charToInt < 35 || charToInt > 38)
+               && (charToInt != 42) && (charToInt != 32)
+               && (charToInt != 38))
+                return false;
+        }
+        return true;
+    }
 }
 
 bool RegistryWindow::checkFullNameField()
 {
+    QString fullName = getFullNameFF();
+    if(fullName.size() < 6 || fullName.size() > 40) return false;
+    // Если ФИО содержит буквы кроме русских
+    if(fullName.contains(QRegularExpression("[^А-Я а-я]")))
+        {
+            return false;
+        }
+    if(fullName.count(" ") != 2) return false;
+    if(fullName.count("  ") != 0) return false;
     return true;
 }
 
 bool RegistryWindow::checkPassportField()
 {
+    QString passInfo = getPassportFF();
+    int length = passInfo.length();
+    if(passInfo.length() != 11) return false;
+    // Если паспортная информация содержит что-то кроме цифр и пробела
+    if(passInfo.contains(QRegularExpression("[^0-9 ]")))
+        {
+            return false;
+        }
+    if(passInfo.count(" ") != 1) return false;
     return true;
 }
 
@@ -102,12 +145,12 @@ string RegistryWindow::getPasswordACKFF()
     return this->ui->passwordField_2->text().toStdString();
 }
 
-string RegistryWindow::getFullNameFF()
+QString RegistryWindow::getFullNameFF()
 {
-    return this->ui->fullNameField->text().toStdString();
+    return this->ui->fullNameField->text();
 }
 
-string RegistryWindow::getPassportFF()
+QString RegistryWindow::getPassportFF()
 {
-    return this->ui->passportField->text().toStdString();
+    return this->ui->passportField->text();
 }

@@ -35,8 +35,8 @@ private:
     string getLoginFF();
     string getPasswordFF();
     string getPasswordACKFF();
-    string getFullNameFF();
-    string getPassportFF();
+    QString getFullNameFF();
+    QString getPassportFF();
 
     Ui::RegistryWindow *ui;
 };
