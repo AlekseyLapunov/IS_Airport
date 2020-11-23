@@ -20,17 +20,30 @@ SOURCES += \
     databases.cpp \
     main.cpp \
     mainwindow.cpp \
-    user.cpp
+    passenger.cpp \
+    passengersbase.cpp \
+    registrywindow.cpp \
+    routesbase.cpp \
+    ticketsbase.cpp \
+    user.cpp \
+    usersbase.cpp
 
 HEADERS += \
     authwindow.h \
     databases.h \
     mainwindow.h \
-    user.h
+    passenger.h \
+    passengersbase.h \
+    registrywindow.h \
+    routesbase.h \
+    ticketsbase.h \
+    user.h \
+    usersbase.h
 
 FORMS += \
     authwindow.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    registrywindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

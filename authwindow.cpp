@@ -1,6 +1,8 @@
 #include "authwindow.h"
 #include "ui_authwindow.h"
 
+#include "registrywindow.h"
+
 AuthWindow::AuthWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AuthWindow)
@@ -30,7 +32,7 @@ bool AuthWindow::checkFields()
     QMessageBox mBox;
     mBox.setWindowTitle(tr("Warning"));
     mBox.setIcon(QMessageBox::Warning);
-    mBox.setText(tr("Check if your data is valid, please"));
+    mBox.setText(tr("Check if entered data is valid, please"));
     if(this->getLoginString().isEmpty() || this->getPasswordString().isEmpty())
     {
         mBox.exec();
@@ -51,7 +53,7 @@ void AuthWindow::accept()
     // Проверка полей на правильность ввода
     if(this->checkFields())
     {
-        if(ManageDataBase.findUser(getLoginString().toStdString(), getPasswordString().toStdString(), userPtr))
+        if(ManageDataBase.find(getLoginString().toStdString(), getPasswordString().toStdString(), userPtr))
         {
         QDialog::accept();
         }
@@ -65,6 +67,13 @@ void AuthWindow::reject()
     QDialog::reject();
 }
 
+void AuthWindow::registry()
+{
+    RegistryWindow regWindow;
+    regWindow.setWindowTitle(tr("Регистрация"));
+    regWindow.exec();
+}
+
 QString AuthWindow::getLoginString()
 {
     return this->ui->loginField->text();
@@ -74,5 +83,3 @@ QString AuthWindow::getPasswordString()
 {
     return this->ui->passwordField->text();
 }
-
-

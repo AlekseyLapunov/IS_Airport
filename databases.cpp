@@ -15,7 +15,7 @@ void DataBases::checkForDir()
     else return;
 }
 
-bool DataBases::findUser(string login, string password, User *user)
+bool DataBases::find(string login, string password, User *user)
 {
     return true;
 }

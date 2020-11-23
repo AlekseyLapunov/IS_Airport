@@ -66,6 +66,13 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QPushButton" name="registerButton">
+     <property name="text">
+      <string>Регистрация</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
@@ -102,5 +109,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>registerButton</sender>
+   <signal>clicked()</signal>
+   <receiver>AuthWindow</receiver>
+   <slot>registry()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>99</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>registry()</slot>
+ </slots>
 </ui>
