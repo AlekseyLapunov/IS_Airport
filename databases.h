@@ -16,23 +16,12 @@ public:
     DataBases();
     // Проверяет наличие папки базы данных
     void checkForDir();
+    // Проверяет наличие двоичных файлов базы данных
+    void checkForBinFiles();
 
     bool find(string login, string password, User *user);
 
-private:
-    // Создание папки для баз данных
-    void makeDir();
-    // Папка с базами данных
-    QDir dataBasesFolder;
-
-    // База данных пользователей
-    UsersBase users;
-    // База данных пассажиров
-    PassengersBase passengers;
-    // База данных рейсов
-    RoutesBase routes;
-    // База данных билетов
-    TicketsBase tickets;
+    void createUserNote(string login, string password, QString fullName, QString passportInfo);
 };
 
 #endif // DATABASES_H

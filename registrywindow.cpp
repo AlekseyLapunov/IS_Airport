@@ -19,21 +19,34 @@ RegistryWindow::~RegistryWindow()
 
 void RegistryWindow::beginRegistry()
 {
-    QMessageBox mBox;
     if(!checkFields())
     {
-        mBox.setWindowTitle(tr("Warning"));
-        mBox.setIcon(QMessageBox::Warning);
-        mBox.setText(tr("Check if entered data is valid, please"));
-        mBox.exec();
-    } else
+        warnBox();
+    }
+    else
     {
-        mBox.setWindowTitle(tr("Congratulations!"));
-        mBox.setIcon(QMessageBox::Information);
-        mBox.setText(tr("Registry Complete"));
-        mBox.exec();
+        gracBox();
+
         QDialog::accept();
     }
+}
+
+void RegistryWindow::gracBox()
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Congratulations!"));
+    mBox.setIcon(QMessageBox::Information);
+    mBox.setText(tr("Registry Complete"));
+    mBox.exec();
+}
+
+void RegistryWindow::warnBox()
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Warning"));
+    mBox.setIcon(QMessageBox::Warning);
+    mBox.setText(tr("Check if entered data is valid, please"));
+    mBox.exec();
 }
 
 bool RegistryWindow::checkFields()

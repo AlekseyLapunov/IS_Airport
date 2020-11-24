@@ -10,6 +10,7 @@ AuthWindow::AuthWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Auth. Window");
     ManageDataBase.checkForDir();
+    ManageDataBase.checkForBinFiles();
 }
 
 AuthWindow::~AuthWindow()

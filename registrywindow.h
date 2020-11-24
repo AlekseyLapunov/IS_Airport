@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <string>
+#include <databases.h>
+
 using namespace std;
 
 namespace Ui {
@@ -21,6 +23,8 @@ public:
 
 private slots:
     void beginRegistry();
+    void gracBox();
+    void warnBox();
 
 private:
     bool checkFields();

@@ -2,17 +2,47 @@
 
 DataBases::DataBases()
 {
-    dataBasesFolder.exists();
+
 }
 
 void DataBases::checkForDir()
 {
-    if(!dataBasesFolder.exists("Data Bases"))
+    QDir dataBasesFolder;
+    if(!dataBasesFolder.exists("Data_Bases"))
     {
-        this->makeDir();
+        dataBasesFolder.mkdir("Data_Bases");
         return;
     }
     else return;
+}
+
+void DataBases::checkForBinFiles()
+{
+    QFile temp;
+    if(!temp.exists("Users_Base.bin"))
+    {
+        QFile usersBase("Data_Bases/Users_Base.bin");
+        usersBase.open(QIODevice::WriteOnly);
+        usersBase.close();
+    }
+    if(!temp.exists("Passengers_Base.bin"))
+    {
+        QFile usersBase("Data_Bases/Passengers_Base.bin");
+        usersBase.open(QIODevice::WriteOnly);
+        usersBase.close();
+    }
+    if(!temp.exists("Routes_Base.bin"))
+    {
+        QFile usersBase("Data_Bases/Routes_Base.bin");
+        usersBase.open(QIODevice::WriteOnly);
+        usersBase.close();
+    }
+    if(!temp.exists("Tickets_Base.bin"))
+    {
+        QFile usersBase("Data_Bases/Tickets_Base.bin");
+        usersBase.open(QIODevice::WriteOnly);
+        usersBase.close();
+    }
 }
 
 bool DataBases::find(string login, string password, User *user)
@@ -20,8 +50,8 @@ bool DataBases::find(string login, string password, User *user)
     return true;
 }
 
-void DataBases::makeDir()
+void DataBases::createUserNote(string login, string password, QString fullName, QString passportInfo)
 {
-    // Создаёт папку с базами данных
-    dataBasesFolder.mkdir("Data Bases");
+
 }
+
