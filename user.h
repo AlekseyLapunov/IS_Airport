@@ -31,7 +31,7 @@ public:
     void changeAuthInfo(string password, int type);
 
     User();
-
+    User(string sLogin, string sPassword, int sID);
 };
 
 #endif // USER_H

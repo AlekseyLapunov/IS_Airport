@@ -23,7 +23,9 @@ SOURCES += \
     passenger.cpp \
     passengersbase.cpp \
     registrywindow.cpp \
+    route.cpp \
     routesbase.cpp \
+    ticket.cpp \
     ticketsbase.cpp \
     user.cpp \
     usersbase.cpp
@@ -35,7 +37,9 @@ HEADERS += \
     passenger.h \
     passengersbase.h \
     registrywindow.h \
+    route.h \
     routesbase.h \
+    ticket.h \
     ticketsbase.h \
     user.h \
     usersbase.h

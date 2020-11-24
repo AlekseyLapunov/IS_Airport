@@ -26,7 +26,8 @@ void RegistryWindow::beginRegistry()
     else
     {
         gracBox();
-
+        dataBaseManager.refreshUsersBase();
+        dataBaseManager.refreshPassengersBase();
         QDialog::accept();
     }
 }

@@ -42,6 +42,8 @@ private:
     QString getFullNameFF();
     QString getPassportFF();
 
+    DataBases dataBaseManager;
+
     Ui::RegistryWindow *ui;
 };
 

@@ -50,8 +50,15 @@ bool DataBases::find(string login, string password, User *user)
     return true;
 }
 
-void DataBases::createUserNote(string login, string password, QString fullName, QString passportInfo)
+void DataBases::refreshUsersBase(QString login, QString password)
 {
+    User uTransmitter(login.toStdString(), password.toStdString(), 1);
+    UsersList.push_back(uTransmitter);
+}
 
+void DataBases::refreshPassengersBase(QString fullName, QString passport)
+{
+    Passenger pTransmitter(fullName, passport.toStdString());
+    PassengerList.push_back(pTransmitter);
 }
 

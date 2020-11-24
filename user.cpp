@@ -6,6 +6,16 @@ User::User()
     login = "Login_Undefined";
     password = "Password_Undefined";
     type = idUndefined;
+    ID = -1;
+    return;
+}
+
+User::User(string sLogin, string sPassword, int sID)
+{
+    login = sLogin;
+    password = sPassword;
+    ID = sID;
+    type = User::idPassenger;
     return;
 }
 
