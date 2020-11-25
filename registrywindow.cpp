@@ -17,6 +17,11 @@ RegistryWindow::~RegistryWindow()
     delete ui;
 }
 
+void RegistryWindow::giveDBPtr(DataBases &DBPtr)
+{
+    DBManagePtr = &DBPtr;
+}
+
 void RegistryWindow::beginRegistry()
 {
     if(!checkFields())
@@ -26,8 +31,8 @@ void RegistryWindow::beginRegistry()
     else
     {
         gracBox();
-        dataBaseManager.refreshUsersBase();
-        dataBaseManager.refreshPassengersBase();
+        DBManagePtr->pushUser();
+        DBManagePtr->pushPassenger();
         QDialog::accept();
     }
 }

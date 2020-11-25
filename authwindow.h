@@ -19,6 +19,7 @@ public:
     ~AuthWindow();
     void giveFlag(bool &flag);
     void giveUserPtr(User &user);
+    void giveDBManagerPtr(DataBases &DBPointer);
 
 private slots:
     void accept() override;
@@ -34,11 +35,10 @@ private:
     // Проверяет поля ввода на правильность
     bool checkFields();
 
+    DataBases *DBManagerPtr;
     User *userPtr;
     bool *authWindowClosed;
     Ui::AuthWindow *ui;
-
-    DataBases ManageDataBase;
 
 };
 

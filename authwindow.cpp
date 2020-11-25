@@ -9,8 +9,7 @@ AuthWindow::AuthWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Auth. Window");
-    ManageDataBase.checkForDir();
-    ManageDataBase.checkForBinFiles();
+    DataBases::checkForDir();
 }
 
 AuthWindow::~AuthWindow()
@@ -26,6 +25,11 @@ void AuthWindow::giveFlag(bool &flag)
 void AuthWindow::giveUserPtr(User &user)
 {
     userPtr = &user;
+}
+
+void AuthWindow::giveDBManagerPtr(DataBases &DBPointer)
+{
+    DBManagerPtr = &DBPointer;
 }
 
 bool AuthWindow::checkFields()
@@ -54,9 +58,9 @@ void AuthWindow::accept()
     // Проверка полей на правильность ввода
     if(this->checkFields())
     {
-        if(ManageDataBase.find(getLoginString().toStdString(), getPasswordString().toStdString(), userPtr))
+        if(DataBases::find(getLoginString().toStdString(), getPasswordString().toStdString(), userPtr))
         {
-        QDialog::accept();
+            QDialog::accept();
         }
     }
     else return;
@@ -72,6 +76,7 @@ void AuthWindow::registry()
 {
     RegistryWindow regWindow;
     regWindow.setWindowTitle(tr("Регистрация"));
+    regWindow.giveDBPtr(*DBManagerPtr);
     regWindow.exec();
 }
 

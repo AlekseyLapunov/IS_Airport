@@ -4,6 +4,7 @@
 #include <authwindow.h>
 #include <QMainWindow>
 #include <user.h>
+#include <databases.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +24,18 @@ public:
 private:
     // Текущий пользователь
     User currentUser;
+
+    // Список пользователей
+    QList<User> UsersList;
+    // Список пассажиров
+    QList<Passenger> PassengerList;
+    // Список билетов
+    QList<Ticket> TicketsList;
+    // Список рейсов
+    QList<Route> RoutesList;
+
+    // Взаимодействие с базами данных
+    DataBases DBManager;
 
     // Окно авторизации
     AuthWindow authWindow;

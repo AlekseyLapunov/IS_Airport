@@ -16,49 +16,49 @@ void DataBases::checkForDir()
     else return;
 }
 
-void DataBases::checkForBinFiles()
-{
-    QFile temp;
-    if(!temp.exists("Users_Base.bin"))
-    {
-        QFile usersBase("Data_Bases/Users_Base.bin");
-        usersBase.open(QIODevice::WriteOnly);
-        usersBase.close();
-    }
-    if(!temp.exists("Passengers_Base.bin"))
-    {
-        QFile usersBase("Data_Bases/Passengers_Base.bin");
-        usersBase.open(QIODevice::WriteOnly);
-        usersBase.close();
-    }
-    if(!temp.exists("Routes_Base.bin"))
-    {
-        QFile usersBase("Data_Bases/Routes_Base.bin");
-        usersBase.open(QIODevice::WriteOnly);
-        usersBase.close();
-    }
-    if(!temp.exists("Tickets_Base.bin"))
-    {
-        QFile usersBase("Data_Bases/Tickets_Base.bin");
-        usersBase.open(QIODevice::WriteOnly);
-        usersBase.close();
-    }
-}
-
 bool DataBases::find(string login, string password, User *user)
 {
     return true;
 }
 
-void DataBases::refreshUsersBase(QString login, QString password)
+void DataBases::pushUser()
 {
-    User uTransmitter(login.toStdString(), password.toStdString(), 1);
-    UsersList.push_back(uTransmitter);
+
+    DataBases::refreshUsersBase();
 }
 
-void DataBases::refreshPassengersBase(QString fullName, QString passport)
+void DataBases::pushPassenger()
 {
-    Passenger pTransmitter(fullName, passport.toStdString());
-    PassengerList.push_back(pTransmitter);
+
+    DataBases::refreshPassengersBase();
 }
+
+void DataBases::refreshUsersBase()
+{
+
+}
+
+void DataBases::refreshPassengersBase()
+{
+
+}
+
+void DataBases::setListPointers(QList<User> &users, QList<Passenger> &passes, QList<Route> &routes, QList<Ticket> &tickets)
+{
+    pUserList = &users;
+    pPassList = &passes;
+    pRoutesList = &routes;
+    pTicketsList = &tickets;
+}
+
+
+
+
+
+
+
+
+
+
+
 

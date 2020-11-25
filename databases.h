@@ -18,20 +18,22 @@ class DataBases
 public:
     DataBases();
     // Проверяет наличие папки базы данных
-    void checkForDir();
-    // Проверяет наличие двоичных файлов баз данных
-    void checkForBinFiles();
+    static void checkForDir();
 
-    bool find(string login, string password, User *user);
+    static bool find(string login, string password, User *user);
 
-    void refreshUsersBase(QString login, QString password);
-    void refreshPassengersBase(QString fullName, QString passport);
+    void pushUser();
+    void pushPassenger();
+    void refreshUsersBase();
+    void refreshPassengersBase();
 
+    void setListPointers(QList<User> &users, QList<Passenger> &passes, QList<Route> &routes, QList<Ticket> &tickets);
 private:
-    QList<User> UsersList;
-    QList<Passenger> PassengerList;
-    QList<Ticket> TicketsList;
-    QList<Route> RoutesList;
+
+    QList<User> *pUserList;
+    QList<Passenger> *pPassList;
+    QList<Route> *pRoutesList;
+    QList<Ticket> *pTicketsList;
 };
 
 #endif // DATABASES_H

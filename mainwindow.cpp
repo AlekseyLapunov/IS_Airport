@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    DBManager.setListPointers(UsersList, PassengerList, RoutesList, TicketsList);
     authWindow.giveFlag(authWindowClosed);
     authWindow.giveUserPtr(currentUser);
     // Вызов окна авторизации
