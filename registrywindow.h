@@ -22,8 +22,6 @@ public:
 
 private slots:
     void beginRegistry();
-    void gracBox();
-    void warnBox();
 
 private:
     bool checkFields();
@@ -32,8 +30,11 @@ private:
     bool checkPasswordField();
     bool checkFullNameField();
     bool checkPassportField();
-
     bool anyEmpty();
+
+    void gracBox();
+    void warnBox();
+    void existensBox();
 
     string getLoginFF();
     string getPasswordFF();

@@ -26,14 +26,25 @@ void RegistryWindow::beginRegistry()
 {
     if(!checkFields())
     {
-        warnBox();
+        RegistryWindow::warnBox();
     }
     else
     {
-        gracBox();
-        DBManagePtr->pushUser();
-        DBManagePtr->pushPassenger();
-        QDialog::accept();
+        RegistryWindow::gracBox();
+        string thisLogin = getLoginFF(), thisPassword = getPasswordFF();
+        QString thisFullName = getFullNameFF(), thisPassInfo = getPassportFF();
+        QString thisPassport = getPassportFF();
+        if(DBManagePtr->loginFound(thisLogin) || DBManagePtr->passFound(thisPassport))
+        {
+            RegistryWindow::existensBox();
+        }
+        else
+        {
+            DBManagePtr->pushUser(thisLogin, thisPassword);
+            DBManagePtr->pushPassenger(thisFullName, thisPassInfo);
+            QDialog::accept();
+        }
+
     }
 }
 
@@ -52,6 +63,15 @@ void RegistryWindow::warnBox()
     mBox.setWindowTitle(tr("Warning"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Check if entered data is valid, please"));
+    mBox.exec();
+}
+
+void RegistryWindow::existensBox()
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Warning"));
+    mBox.setIcon(QMessageBox::Warning);
+    mBox.setText(tr("This user already exists"));
     mBox.exec();
 }
 
@@ -86,7 +106,8 @@ bool RegistryWindow::checkLoginField()
         for(int i = 0; i < login.length(); i++)
         {
             int charToInt = login[i];
-            if((charToInt < 65 || charToInt > 90) && (charToInt < 97 || charToInt > 122) && (charToInt < 48 || charToInt > 57))
+            if((charToInt < 97 || charToInt > 122) &&
+               (charToInt < 48 || charToInt > 57))
                 return false;
         }
         return true;

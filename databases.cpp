@@ -21,26 +21,33 @@ bool DataBases::find(string login, string password, User *user)
     return true;
 }
 
-void DataBases::pushUser()
+void DataBases::pushUser(string sLogin, string sPassword)
 {
+    DataBases::loadUserBase();
 
-    DataBases::refreshUsersBase();
+    int sID = DataBases::getLastID();
+
+    User transmitter(sLogin, sPassword, sID);
+    pUserList->push_back(transmitter);
+
+    UsersBase::refreshBase(*pUserList);
 }
 
-void DataBases::pushPassenger()
+void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
 {
+    DataBases::loadPassengerBase();
 
-    DataBases::refreshPassengersBase();
+    Passenger transmitter(sFullName, sPassportInfo.toStdString());
+    pPassList->push_back(transmitter);
+
+    PassengersBase::refreshBase(*pPassList);
 }
 
-void DataBases::refreshUsersBase()
+
+void DataBases::loadAllBase()
 {
-
-}
-
-void DataBases::refreshPassengersBase()
-{
-
+    DataBases::loadUserBase();
+    DataBases::loadPassengerBase();
 }
 
 void DataBases::setListPointers(QList<User> &users, QList<Passenger> &passes, QList<Route> &routes, QList<Ticket> &tickets)
@@ -50,6 +57,7 @@ void DataBases::setListPointers(QList<User> &users, QList<Passenger> &passes, QL
     pRoutesList = &routes;
     pTicketsList = &tickets;
 }
+
 
 
 

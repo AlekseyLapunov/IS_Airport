@@ -22,14 +22,22 @@ public:
 
     static bool find(string login, string password, User *user);
 
-    void pushUser();
-    void pushPassenger();
-    void refreshUsersBase();
-    void refreshPassengersBase();
+    bool loginFound(string login);
+    bool passFound(QString passInfo);
+
+    void pushUser(string sLogin, string sPassword);
+    void pushPassenger(QString fullName, QString passInfo);
+
+    static void loadAllBase();
+
+    void testInsert(User &user);
 
     void setListPointers(QList<User> &users, QList<Passenger> &passes, QList<Route> &routes, QList<Ticket> &tickets);
 private:
 
+    static void loadUserBase();
+    static void loadPassengerBase();
+    static int getLastID();
     QList<User> *pUserList;
     QList<Passenger> *pPassList;
     QList<Route> *pRoutesList;
