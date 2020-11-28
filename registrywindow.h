@@ -18,7 +18,7 @@ class RegistryWindow : public QDialog
 public:
     explicit RegistryWindow(QWidget *parent = nullptr);
     ~RegistryWindow();
-    void giveDBPtr(DataBases &DBPtr);
+    void giveDBPtr(DataBases *DBPtr);
 
 private slots:
     void beginRegistry();

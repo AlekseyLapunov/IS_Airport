@@ -8,7 +8,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    DBManager.setListPointers(UsersList, PassengerList, RoutesList, TicketsList);
+    MainWindow::setNulls();
+    DBManager.setListPointers(&UsersList, &PassengerList, &RoutesList, &TicketsList);
+    authWindow.giveDBManagerPtr(&DBManager);
     authWindow.giveFlag(authWindowClosed);
     authWindow.giveUserPtr(currentUser);
     // Вызов окна авторизации
@@ -23,6 +25,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::setNulls()
+{
+    UsersList.clear();
+    PassengerList.clear();
+    TicketsList.clear();
+    RoutesList.clear();
 }
 
 

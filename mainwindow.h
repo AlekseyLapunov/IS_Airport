@@ -21,6 +21,8 @@ public:
     bool MainWindowClosed = true;
     bool authWindowClosed = false;
 
+    void setNulls();
+
 private:
     // Текущий пользователь
     User currentUser;

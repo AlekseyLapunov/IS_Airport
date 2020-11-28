@@ -19,7 +19,7 @@ public:
     ~AuthWindow();
     void giveFlag(bool &flag);
     void giveUserPtr(User &user);
-    void giveDBManagerPtr(DataBases &DBPointer);
+    void giveDBManagerPtr(DataBases *DBPointer);
 
 private slots:
     void accept() override;

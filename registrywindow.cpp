@@ -17,9 +17,9 @@ RegistryWindow::~RegistryWindow()
     delete ui;
 }
 
-void RegistryWindow::giveDBPtr(DataBases &DBPtr)
+void RegistryWindow::giveDBPtr(DataBases *DBPtr)
 {
-    DBManagePtr = &DBPtr;
+    DBManagePtr = DBPtr;
 }
 
 void RegistryWindow::beginRegistry()
@@ -154,7 +154,7 @@ bool RegistryWindow::checkPassportField()
 {
     QString passInfo = getPassportFF();
     int length = passInfo.length();
-    if(passInfo.length() != 11) return false;
+    if(length != 11) return false;
     // Если паспортная информация содержит что-то кроме цифр и пробела
     if(passInfo.contains(QRegularExpression("[^0-9 ]")))
         {

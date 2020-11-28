@@ -5,7 +5,8 @@ PassengersBase::PassengersBase()
 
 }
 
-void PassengersBase::refreshBase(std::list<User> &pPassList)
+void PassengersBase::refreshBase(QList<Passenger> &pPassList)
 {
 
 }
+

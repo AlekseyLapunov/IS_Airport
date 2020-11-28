@@ -30,14 +30,12 @@ public:
 
     static void loadAllBase();
 
-    void testInsert(User &user);
-
-    void setListPointers(QList<User> &users, QList<Passenger> &passes, QList<Route> &routes, QList<Ticket> &tickets);
+    void setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets);
 private:
 
     static void loadUserBase();
     static void loadPassengerBase();
-    static int getLastID();
+
     QList<User> *pUserList;
     QList<Passenger> *pPassList;
     QList<Route> *pRoutesList;

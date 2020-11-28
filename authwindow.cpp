@@ -27,9 +27,9 @@ void AuthWindow::giveUserPtr(User &user)
     userPtr = &user;
 }
 
-void AuthWindow::giveDBManagerPtr(DataBases &DBPointer)
+void AuthWindow::giveDBManagerPtr(DataBases *DBPointer)
 {
-    DBManagerPtr = &DBPointer;
+    DBManagerPtr = DBPointer;
 }
 
 bool AuthWindow::checkFields()
@@ -76,7 +76,7 @@ void AuthWindow::registry()
 {
     RegistryWindow regWindow;
     regWindow.setWindowTitle(tr("Регистрация"));
-    regWindow.giveDBPtr(*DBManagerPtr);
+    regWindow.giveDBPtr(DBManagerPtr);
     regWindow.exec();
 }
 
