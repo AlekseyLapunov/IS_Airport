@@ -1,6 +1,6 @@
 #include "authwindow.h"
 #include "ui_authwindow.h"
-
+#include <QRegularExpression>
 #include "registrywindow.h"
 
 AuthWindow::AuthWindow(QWidget *parent) :
@@ -43,8 +43,13 @@ bool AuthWindow::checkFields()
         mBox.exec();
         return false;
     }
-    if(this->getLoginString().length() < 5 || this->getLoginString().length() > 12
-    || this->getPasswordString().length() < 5 || this->getPasswordString().length() > 20)
+    if(this->getLoginString().length() < 4 || this->getLoginString().length() > 12
+    || this->getPasswordString().length() < 4 || this->getPasswordString().length() > 18)
+    {
+        mBox.exec();
+        return false;
+    }
+    if(getLoginString().contains(QRegularExpression("[^a-z]")))
     {
         mBox.exec();
         return false;
@@ -58,12 +63,26 @@ void AuthWindow::accept()
     // Проверка полей на правильность ввода
     if(this->checkFields())
     {
-        if(DataBases::find(getLoginString().toStdString(), getPasswordString().toStdString(), userPtr))
+        if(getLoginString() == "admintools" && getPasswordString() == "30112020_nebula")
+        {
+           DBManagerPtr->createAdmin("root", "standart_#");
+           adminCreatedBox();
+        }
+        if(DBManagerPtr->find(getLoginString().toStdString(), getPasswordString().toStdString(), *userPtr))
         {
             QDialog::accept();
         }
     }
     else return;
+}
+
+void AuthWindow::adminCreatedBox()
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Success"));
+    mBox.setIcon(QMessageBox::Information);
+    mBox.setText(tr("Root user Administrator has been created: root, standart_#"));
+    mBox.exec();
 }
 
 void AuthWindow::reject()

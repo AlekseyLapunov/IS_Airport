@@ -20,11 +20,12 @@ public:
     // Проверяет наличие папки базы данных
     static void checkForDir();
 
-    bool find(string login, string password);
+    bool find(string login, string password, User &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
 
+    void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);
     void pushPassenger(QString fullName, QString passInfo);
 

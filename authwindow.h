@@ -35,6 +35,8 @@ private:
     // Проверяет поля ввода на правильность
     bool checkFields();
 
+    void adminCreatedBox();
+
     DataBases *DBManagerPtr;
     User *userPtr;
     bool *authWindowClosed;

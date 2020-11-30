@@ -16,9 +16,10 @@ void DataBases::checkForDir()
     else return;
 }
 
-bool DataBases::find(string login, string password, User *user)
+bool DataBases::find(string login, string password, User &ptr)
 {
-    return true;
+    if(UsersBase::find(login, password, ptr)) return true;
+    else return false;
 }
 
 bool DataBases::passFound(QString passInfo)
@@ -26,16 +27,28 @@ bool DataBases::passFound(QString passInfo)
     return 0;
 }
 
+void DataBases::createAdmin(string sLogin, string sPassword)
+{
+    UsersBase::loadBase(*pUserList);
+
+    int sID = pUserList->size() + 1;
+
+    User transmitter(sLogin, sPassword, sID, User::idAdministrator);
+    pUserList->push_back(transmitter);
+
+    UsersBase::refreshBase(*pUserList);
+}
+
 bool DataBases::loginFound(string login)
 {
-    return 0;
+    if(UsersBase::find(login)) return true; else return false;
 }
 
 void DataBases::pushUser(string sLogin, string sPassword)
 {
     UsersBase::loadBase(*pUserList);
 
-    int sID = UsersBase::getLastID();
+    int sID = pUserList->size() + 1;
 
     User transmitter(sLogin, sPassword, sID);
     pUserList->push_back(transmitter);

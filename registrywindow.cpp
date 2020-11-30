@@ -30,7 +30,7 @@ void RegistryWindow::beginRegistry()
     }
     else
     {
-        RegistryWindow::gracBox();
+
         string thisLogin = getLoginFF(), thisPassword = getPasswordFF();
         QString thisFullName = getFullNameFF(), thisPassInfo = getPassportFF();
         QString thisPassport = getPassportFF();
@@ -43,6 +43,7 @@ void RegistryWindow::beginRegistry()
             DBManagePtr->pushUser(thisLogin, thisPassword);
             DBManagePtr->pushPassenger(thisFullName, thisPassInfo);
             QDialog::accept();
+            RegistryWindow::gracBox();
         }
 
     }
@@ -99,7 +100,7 @@ bool RegistryWindow::anyEmpty()
 bool RegistryWindow::checkLoginField()
 {
     string login = getLoginFF();
-    if(login.length() < 4 || login.length() > 10) return false;
+    if(login.length() < 4 || login.length() > 12) return false;
     else
     {
         // Посимвольная проверка

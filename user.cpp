@@ -24,6 +24,11 @@ int User::getID()
     return this->ID;
 }
 
+int User::getType()
+{
+    return this->type;
+}
+
 string User::getLogin()
 {
     return this->login;

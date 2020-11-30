@@ -7,23 +7,51 @@ UsersBase::UsersBase()
 
 }
 
-void UsersBase::createUserNote(QString login, QString password, int lastID, int type, QDataStream &qstream)
+void UsersBase::createUserNote(QString login, QString password, int ID, int type, QDataStream &qstream)
 {
-    qstream << login << password << lastID << type;
+    qstream << login << password << ID << type;
 }
 
-int UsersBase::getLastID()
+bool UsersBase::find(string fLogin, string fPassword, User &fUser)
 {
-    int lastID = -1;
     QFile usersBase("Data_Bases/Users_Base.bin");
     if(usersBase.open(QIODevice::ReadOnly))
     {
         QDataStream qstream(&usersBase);
-        qstream >> lastID;
-        return lastID;
+        while(!qstream.atEnd())
+        {
+            int id, type; QString login; QString password;
+            qstream >> login >> password >> id >> type;
+            if((login.toStdString() == fLogin) && (password.toStdString() == fPassword))
+            {
+                User foundUser(login.toStdString(), password.toStdString(), id, type);
+                fUser = foundUser;
+                return true;
+            }
+        }
+        usersBase.close();
     }
-    else
-    return -1;
+    return false;
+}
+
+bool UsersBase::find(string fLogin)
+{
+    QFile usersBase("Data_Bases/Users_Base.bin");
+    if(usersBase.open(QIODevice::ReadOnly))
+    {
+        QDataStream qstream(&usersBase);
+        while(!qstream.atEnd())
+        {
+            int id, type; QString login; QString password;
+            qstream >> login >> password >> id >> type;
+            if(login.toStdString() == fLogin)
+            {
+                return true;
+            }
+        }
+        usersBase.close();
+    }
+    return false;
 }
 
 void UsersBase::refreshBase(QList<User> &pUserList)
@@ -34,12 +62,12 @@ void UsersBase::refreshBase(QList<User> &pUserList)
         QDataStream qstream(&usersBase);
         for(int i = 0; i < pUserList.size(); i++)
         {
-            int lastID = pUserList[i].getID();
-            if(lastID != -1)
+            int ID = pUserList[i].getID(), type = pUserList[i].getType();
+            if(ID != -1)
             {
                 QString login = QString::fromStdString(pUserList[i].getLogin());
                 QString password = QString::fromStdString(pUserList[i].getPassword());
-                createUserNote(login, password, lastID + 1, User::idPassenger, qstream);
+                createUserNote(login, password, ID, type, qstream);
             }
         }
         usersBase.close();
@@ -48,6 +76,7 @@ void UsersBase::refreshBase(QList<User> &pUserList)
 
 void UsersBase::loadBase(QList<User> &pUserList)
 {
+    pUserList.clear();
     QFile usersBase("Data_Bases/Users_Base.bin");
     if(usersBase.open(QIODevice::ReadOnly))
     {
