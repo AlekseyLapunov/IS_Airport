@@ -33,7 +33,7 @@ bool DataBases::loginFound(string login)
 
 void DataBases::pushUser(string sLogin, string sPassword)
 {
-    DataBases::loadUserBase();
+    UsersBase::loadBase(*pUserList);
 
     int sID = UsersBase::getLastID();
 
@@ -45,7 +45,7 @@ void DataBases::pushUser(string sLogin, string sPassword)
 
 void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
 {
-    DataBases::loadPassengerBase();
+    //PassengersBase::loadBase(*pPassList);
 
     Passenger transmitter(sFullName, sPassportInfo.toStdString());
     pPassList->push_back(transmitter);
@@ -53,11 +53,9 @@ void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
     PassengersBase::refreshBase(*pPassList);
 }
 
-
 void DataBases::loadAllBase()
 {
-    DataBases::loadUserBase();
-    DataBases::loadPassengerBase();
+    UsersBase::loadBase(*pUserList);
 }
 
 void DataBases::setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets)
@@ -68,15 +66,6 @@ void DataBases::setListPointers(QList<User> *users, QList<Passenger> *passes, QL
     pTicketsList = tickets;
 }
 
-void DataBases::loadUserBase()
-{
-
-}
-
-void DataBases::loadPassengerBase()
-{
-
-}
 
 
 

@@ -10,12 +10,12 @@ User::User()
     return;
 }
 
-User::User(string sLogin, string sPassword, int sID)
+User::User(string sLogin, string sPassword, int sID, int sType)
 {
     login = sLogin;
     password = sPassword;
     ID = sID;
-    type = User::idPassenger;
+    type = sType;
     return;
 }
 

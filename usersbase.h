@@ -11,13 +11,15 @@ class UsersBase
 public:
     UsersBase();
 
-    // Создаёт запись в двоичном файле
-    static void createUserNote(QString login, QString password, int ID, QDataStream &qstream);
+    // Создаёт запись в двоичном файле потока qstream
+    static void createUserNote(QString login, QString password, int ID, int type, QDataStream &qstream);
 
     // Функция находит пользователя в базе данных; возвращает true, если находит
     static bool find(string login, string password, User *user);
 
     static void refreshBase(QList<User> &pUserList);
+
+    static void loadBase(QList<User> &pUserList);
 
     static int getLastID();
 

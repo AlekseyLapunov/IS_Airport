@@ -7,9 +7,9 @@ UsersBase::UsersBase()
 
 }
 
-void UsersBase::createUserNote(QString login, QString password, int lastID, QDataStream &qstream)
+void UsersBase::createUserNote(QString login, QString password, int lastID, int type, QDataStream &qstream)
 {
-    qstream << login << password << lastID;
+    qstream << login << password << lastID << type;
 }
 
 int UsersBase::getLastID()
@@ -39,9 +39,36 @@ void UsersBase::refreshBase(QList<User> &pUserList)
             {
                 QString login = QString::fromStdString(pUserList[i].getLogin());
                 QString password = QString::fromStdString(pUserList[i].getPassword());
-                createUserNote(login, password, lastID + 1, qstream);
+                createUserNote(login, password, lastID + 1, User::idPassenger, qstream);
             }
         }
         usersBase.close();
     }
 }
+
+void UsersBase::loadBase(QList<User> &pUserList)
+{
+    QFile usersBase("Data_Bases/Users_Base.bin");
+    if(usersBase.open(QIODevice::ReadOnly))
+    {
+        QDataStream qstream(&usersBase);
+        while(!qstream.atEnd())
+        {
+            int id, type; QString login; QString password;
+            qstream >> login >> password >> id >> type;
+            User transmitter(login.toStdString(), password.toStdString(), id, type);
+            pUserList.push_back(transmitter);
+        }
+        usersBase.close();
+    }
+}
+
+
+
+
+
+
+
+
+
+

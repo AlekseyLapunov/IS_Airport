@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     MainWindow::setNulls();
     DBManager.setListPointers(&UsersList, &PassengerList, &RoutesList, &TicketsList);
+    DBManager.loadAllBase();
     authWindow.giveDBManagerPtr(&DBManager);
     authWindow.giveFlag(authWindowClosed);
     authWindow.giveUserPtr(currentUser);

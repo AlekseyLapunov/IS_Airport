@@ -20,7 +20,7 @@ public:
     // Проверяет наличие папки базы данных
     static void checkForDir();
 
-    static bool find(string login, string password, User *user);
+    bool find(string login, string password);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
@@ -28,13 +28,10 @@ public:
     void pushUser(string sLogin, string sPassword);
     void pushPassenger(QString fullName, QString passInfo);
 
-    static void loadAllBase();
+    void loadAllBase();
 
     void setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets);
 private:
-
-    static void loadUserBase();
-    static void loadPassengerBase();
 
     QList<User> *pUserList;
     QList<Passenger> *pPassList;
