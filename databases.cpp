@@ -24,7 +24,8 @@ bool DataBases::find(string login, string password, User &ptr)
 
 bool DataBases::passFound(QString passInfo)
 {
-    return 0;
+    if(PassengersBase::find(passInfo.toStdString())) return true;
+    else return false;
 }
 
 void DataBases::createAdmin(string sLogin, string sPassword)
@@ -58,9 +59,11 @@ void DataBases::pushUser(string sLogin, string sPassword)
 
 void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
 {
-    //PassengersBase::loadBase(*pPassList);
+    PassengersBase::loadBase(*pPassList);
 
-    Passenger transmitter(sFullName, sPassportInfo.toStdString());
+    int sID = pUserList->size();
+
+    Passenger transmitter(sFullName, sPassportInfo.toStdString(), sID);
     pPassList->push_back(transmitter);
 
     PassengersBase::refreshBase(*pPassList);
@@ -69,6 +72,7 @@ void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
 void DataBases::loadAllBase()
 {
     UsersBase::loadBase(*pUserList);
+    PassengersBase::loadBase(*pPassList);
 }
 
 void DataBases::setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets)

@@ -16,7 +16,10 @@ public:
 
 
     Passenger();
-    Passenger(QString sFullName, string sPassportInfo);
+    Passenger(QString sFullName, string sPassportInfo, int ID);
+
+    QString getFullName();
+    QString getPassport();
 };
 
 #endif // PASSENGER_H

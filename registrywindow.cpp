@@ -104,7 +104,7 @@ bool RegistryWindow::checkLoginField()
     else
     {
         // Посимвольная проверка
-        for(int i = 0; i < login.length(); i++)
+        for(int i = 0; i < (int) login.length(); i++)
         {
             int charToInt = login[i];
             if((charToInt < 97 || charToInt > 122) &&
@@ -122,7 +122,7 @@ bool RegistryWindow::checkPasswordField()
     else
     {
         // Посимвольная проверка
-        for(int i = 0; i < password.length(); i++)
+        for(int i = 0; i < (int) password.length(); i++)
         {
             int charToInt = password[i];
             if((charToInt < 65 || charToInt > 90)
