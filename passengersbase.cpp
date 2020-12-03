@@ -33,6 +33,29 @@ bool PassengersBase::find(QString fFullName, QString fPassport, Passenger &fPass
     return false;
 }
 
+bool PassengersBase::find(int id, Passenger &ptr)
+{
+    QFile passBase("Data_Bases/Passengers_Base.bin");
+    if(passBase.open(QIODevice::ReadOnly))
+    {
+        QDataStream qstream(&passBase);
+        while(!qstream.atEnd())
+        {
+            QString fullName; QString passport; int ID;
+            qstream >> fullName >> passport >> ID;
+            if(ID == id)
+            {
+                Passenger transmitter(fullName, passport.toStdString(), ID);
+                ptr = transmitter;
+                return true;
+            }
+        }
+        passBase.close();
+    }
+    return false;
+    return true;
+}
+
 bool PassengersBase::find(string passportCombination)
 {
     QFile passBase("Data_Bases/Passengers_Base.bin");

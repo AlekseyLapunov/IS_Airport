@@ -21,6 +21,7 @@ public:
     static void checkForDir();
 
     bool find(string login, string password, User &ptr);
+    bool find(int id, Passenger &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);

@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <user.h>
 #include <databases.h>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +19,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void showCurrent();
     bool MainWindowClosed = true;
     bool authWindowClosed = false;
 
@@ -26,6 +28,8 @@ public:
 private:
     // Текущий пользователь
     User currentUser;
+    // Текущий пассажир
+    Passenger currentPass;
 
     // Список пользователей
     QList<User> UsersList;

@@ -19,6 +19,7 @@ public:
     ~AuthWindow();
     void giveFlag(bool &flag);
     void giveUserPtr(User &user);
+    void givePassPtr(Passenger &pass);
     void giveDBManagerPtr(DataBases *DBPointer);
 
 private slots:
@@ -39,6 +40,7 @@ private:
 
     DataBases *DBManagerPtr;
     User *userPtr;
+    Passenger *passPtr;
     bool *authWindowClosed;
     Ui::AuthWindow *ui;
 

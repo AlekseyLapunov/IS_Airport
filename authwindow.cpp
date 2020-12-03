@@ -27,6 +27,11 @@ void AuthWindow::giveUserPtr(User &user)
     userPtr = &user;
 }
 
+void AuthWindow::givePassPtr(Passenger &pass)
+{
+    passPtr = &pass;
+}
+
 void AuthWindow::giveDBManagerPtr(DataBases *DBPointer)
 {
     DBManagerPtr = DBPointer;
@@ -70,6 +75,7 @@ void AuthWindow::accept()
         }
         if(DBManagerPtr->find(getLoginString().toStdString(), getPasswordString().toStdString(), *userPtr))
         {
+            DBManagerPtr->find(userPtr->getID(), *passPtr);
             QDialog::accept();
         }
     }

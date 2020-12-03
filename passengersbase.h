@@ -16,6 +16,8 @@ public:
     // Функция находит пассажира в базе данных
     static bool find(QString fullName, QString passport, Passenger &fPassenger);
 
+    static bool find(int id, Passenger &ptr);
+
     // Функция находит комбинацию серии и номера паспорта в базе данных
     static bool find(string passportCombination);
 

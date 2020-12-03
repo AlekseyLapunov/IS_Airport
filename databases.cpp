@@ -22,6 +22,12 @@ bool DataBases::find(string login, string password, User &ptr)
     else return false;
 }
 
+bool DataBases::find(int id, Passenger &ptr)
+{
+    if(PassengersBase::find(id, ptr)) return true;
+    else return false;
+}
+
 bool DataBases::passFound(QString passInfo)
 {
     if(PassengersBase::find(passInfo.toStdString())) return true;
