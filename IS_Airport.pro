@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     authwindow.cpp \
     databases.cpp \
+    edituserwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     passenger.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     authwindow.h \
     databases.h \
+    edituserwindow.h \
     mainwindow.h \
     passenger.h \
     passengersbase.h \
@@ -41,6 +43,7 @@ HEADERS += \
 
 FORMS += \
     authwindow.ui \
+    edituserwindow.ui \
     mainwindow.ui \
     registrywindow.ui \
     usersviewwindow.ui
