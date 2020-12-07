@@ -25,6 +25,10 @@ public:
 
     void setNulls();
 
+private slots:
+
+    void viewUsers();
+
 private:
     // Текущий пользователь
     User currentUser;
@@ -39,6 +43,8 @@ private:
     QList<Ticket> TicketsList;
     // Список рейсов
     QList<Route> RoutesList;
+
+    void disableForType();
 
     // Взаимодействие с базами данных
     DataBases DBManager;

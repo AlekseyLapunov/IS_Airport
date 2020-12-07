@@ -18,12 +18,13 @@ MainWindow::MainWindow(QWidget *parent)
     authWindow.givePassPtr(currentPass);
     // Вызов окна авторизации
     authWindow.exec();
-    MainWindow::showCurrent();
    if(!authWindowClosed)
    {
        MainWindowClosed = false;
        this->show();
    }
+   MainWindow::showCurrent();
+   MainWindow::disableForType();
 }
 
 MainWindow::~MainWindow()
@@ -37,6 +38,34 @@ void MainWindow::setNulls()
     PassengerList.clear();
     TicketsList.clear();
     RoutesList.clear();
+}
+
+void MainWindow::viewUsers()
+{
+
+}
+
+void MainWindow::disableForType()
+{
+    if(this->currentUser.getType() == User::idAdministrator)
+    {
+        ui->myInfoButton->setHidden(true);
+        ui->makeRequestButton->setHidden(true);
+    }
+    else if (this->currentUser.getType() == User::idCashier)
+    {
+        ui->myInfoButton->setHidden(true);
+        ui->makeRequestButton->setHidden(true);
+        ui->viewUsersButton->setHidden(true);
+        ui->viewPassesButton->setHidden(true);
+    }
+    else if (this->currentUser.getType() == User::idPassenger)
+    {
+        ui->viewUsersButton->setHidden(true);
+        ui->viewPassesButton->setHidden(true);
+        ui->manageRoutesButton->setHidden(true);
+        ui->viewRequestsButton->setHidden(true);
+    }
 }
 
 void MainWindow::showCurrent()

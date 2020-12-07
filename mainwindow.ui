@@ -6,20 +6,109 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>359</width>
+    <height>379</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>359</width>
+    <height>379</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>758</width>
+    <height>718</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Добро пожаловать.</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewRoutesButton">
+      <property name="text">
+       <string>Доступные рейсы</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="manageRoutesButton">
+      <property name="text">
+       <string>Создание / Удаление рейса</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewUsersButton">
+      <property name="text">
+       <string>Просмотр пользователей</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewPassesButton">
+      <property name="text">
+       <string>Просмотр пассажиров</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="viewRequestsButton">
+      <property name="text">
+       <string>Просмотр запросов</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="makeRequestButton">
+      <property name="text">
+       <string>Сделать запрос билета</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="myInfoButton">
+      <property name="text">
+       <string>Мои данные</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>359</width>
      <height>21</height>
     </rect>
    </property>
@@ -27,5 +116,25 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>viewUsersButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewUsers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>163</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>viewUsers()</slot>
+ </slots>
 </ui>
