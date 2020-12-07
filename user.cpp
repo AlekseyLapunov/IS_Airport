@@ -29,6 +29,14 @@ int User::getType()
     return this->type;
 }
 
+QString User::getTypeString()
+{
+    if(this->type == idPassenger) return "Passenger";
+    if(this->type == idCashier) return "Cashier";
+    if(this->type == idAdministrator) return "Administrator";
+    return "Undefined";
+}
+
 string User::getLogin()
 {
     return this->login;

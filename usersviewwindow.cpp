@@ -30,12 +30,15 @@ void UsersViewWindow::fillTable()
     table->setColumnCount(3);
     table->setRowCount(usersToShow.size());
     QModelIndex index;
-    QStringList qstringlist = {"ID", "Login", "Type"};
+    QStringList collsName = {"ID", "Login", "Type"};
+    table->setHorizontalHeaderLabels(collsName);
     for(int row = 0; row < table->rowCount(); row++)
     {
-
-        table->setHorizontalHeaderLabels(qstringlist);
+        index = table->index(row, 0);
+        table->setData(index, usersToShow[row].getID());
         index = table->index(row, 1);
         table->setData(index, QString::fromStdString(usersToShow[row].getLogin()));
+        index = table->index(row, 2);
+        table->setData(index, usersToShow[row].getTypeString());
     }
 }

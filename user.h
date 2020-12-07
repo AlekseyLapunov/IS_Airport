@@ -2,6 +2,7 @@
 #define USER_H
 
 #include <string>
+#include <QString>
 using namespace std;
 
 class User
@@ -22,8 +23,10 @@ public:
 
     // Функция возвращает ID
     int getID();
-    // Функция возвращает тип пользователя
+    // Функция возвращает тип пользователя (в формате int)
     int getType();
+    // Функция возвращает тип пользователя (в формате QString)
+    QString getTypeString();
     // Функция возвращает логин
     string getLogin();
     // Функция возвращает пароль
