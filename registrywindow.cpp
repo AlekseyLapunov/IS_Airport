@@ -52,27 +52,27 @@ void RegistryWindow::beginRegistry()
 void RegistryWindow::gracBox()
 {
     QMessageBox mBox;
-    mBox.setWindowTitle(tr("Congratulations!"));
+    mBox.setWindowTitle(tr("Поздравляем!"));
     mBox.setIcon(QMessageBox::Information);
-    mBox.setText(tr("Registry Complete"));
+    mBox.setText(tr("Регистрация завершена."));
     mBox.exec();
 }
 
 void RegistryWindow::warnBox()
 {
     QMessageBox mBox;
-    mBox.setWindowTitle(tr("Warning"));
+    mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
-    mBox.setText(tr("Check if entered data is valid, please"));
+    mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
     mBox.exec();
 }
 
 void RegistryWindow::existensBox()
 {
     QMessageBox mBox;
-    mBox.setWindowTitle(tr("Warning"));
+    mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
-    mBox.setText(tr("This user already exists"));
+    mBox.setText(tr("Такой пользователь уже зарегистрирован"));
     mBox.exec();
 }
 

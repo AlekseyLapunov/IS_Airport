@@ -9,27 +9,33 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     MainWindow::setNulls();
-    DBManager.setListPointers(&UsersList, &PassengerList,
-                              &RoutesList, &TicketsList);
+    MainWindow::giveAllPtrs();
     DBManager.loadAllBase();
-    authWindow.giveDBManagerPtr(&DBManager);
-    authWindow.giveFlag(authWindowClosed);
-    authWindow.giveUserPtr(currentUser);
-    authWindow.givePassPtr(currentPass);
+
     // Вызов окна авторизации
     authWindow.exec();
    if(!authWindowClosed)
    {
        MainWindowClosed = false;
+       MainWindow::manageWidgets();
        this->show();
+       MainWindow::showCurrent();
    }
-   MainWindow::showCurrent();
-   MainWindow::disableForType();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::giveAllPtrs()
+{
+    DBManager.setListPointers(&UsersList, &PassengerList,
+                              &RoutesList, &TicketsList);
+    authWindow.giveDBManagerPtr(&DBManager);
+    authWindow.giveFlag(authWindowClosed);
+    authWindow.giveUserPtr(currentUser);
+    authWindow.givePassPtr(currentPass);
 }
 
 void MainWindow::setNulls()
@@ -42,11 +48,14 @@ void MainWindow::setNulls()
 
 void MainWindow::viewUsers()
 {
-
+    usersWindow.giveListPtr(&UsersList);
+    usersWindow.show();
+    usersWindow.fillTable();
 }
 
-void MainWindow::disableForType()
+void MainWindow::manageWidgets()
 {
+    setWindowTitle(tr("ИС Аэропорт"));
     if(this->currentUser.getType() == User::idAdministrator)
     {
         ui->myInfoButton->setHidden(true);

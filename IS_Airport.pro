@@ -21,7 +21,8 @@ SOURCES += \
     ticket.cpp \
     ticketsbase.cpp \
     user.cpp \
-    usersbase.cpp
+    usersbase.cpp \
+    usersviewwindow.cpp
 
 HEADERS += \
     authwindow.h \
@@ -35,14 +36,19 @@ HEADERS += \
     ticket.h \
     ticketsbase.h \
     user.h \
-    usersbase.h
+    usersbase.h \
+    usersviewwindow.h
 
 FORMS += \
     authwindow.ui \
     mainwindow.ui \
-    registrywindow.ui
+    registrywindow.ui \
+    usersviewwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    icons.qrc

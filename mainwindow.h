@@ -6,6 +6,7 @@
 #include <user.h>
 #include <databases.h>
 #include <QMessageBox>
+#include <usersviewwindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -44,13 +45,16 @@ private:
     // Список рейсов
     QList<Route> RoutesList;
 
-    void disableForType();
+    void manageWidgets();
+    void giveAllPtrs();
 
     // Взаимодействие с базами данных
     DataBases DBManager;
 
     // Окно авторизации
     AuthWindow authWindow;
+    // Просмотр пользователей
+    UsersViewWindow usersWindow;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

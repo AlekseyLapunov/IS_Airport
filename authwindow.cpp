@@ -40,9 +40,9 @@ void AuthWindow::giveDBManagerPtr(DataBases *DBPointer)
 bool AuthWindow::checkFields()
 {
     QMessageBox mBox;
-    mBox.setWindowTitle(tr("Warning"));
+    mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
-    mBox.setText(tr("Check if entered data is valid, please"));
+    mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
     if(this->getLoginString().isEmpty() || this->getPasswordString().isEmpty())
     {
         mBox.exec();
@@ -85,9 +85,9 @@ void AuthWindow::accept()
 void AuthWindow::adminCreatedBox()
 {
     QMessageBox mBox;
-    mBox.setWindowTitle(tr("Success"));
+    mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
-    mBox.setText(tr("Root user Administrator has been created: root, standart_#"));
+    mBox.setText(tr("Корневой администратор был создан: root, standart_#"));
     mBox.exec();
 }
 
