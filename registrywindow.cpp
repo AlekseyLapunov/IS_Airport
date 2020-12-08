@@ -100,6 +100,7 @@ bool RegistryWindow::anyEmpty()
 bool RegistryWindow::checkLoginField()
 {
     string login = getLoginFF();
+    if(login == "admintools" || login == "root") return false;
     if(login.length() < 4 || login.length() > 12) return false;
     else
     {

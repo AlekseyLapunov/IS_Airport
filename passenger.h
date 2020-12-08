@@ -18,6 +18,8 @@ public:
     Passenger();
     Passenger(QString sFullName, string sPassportInfo, int ID);
 
+    static QString fixFullName(QString sFullName);
+
     QString getFullName();
     QString getPassport();
 };

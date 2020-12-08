@@ -69,6 +69,8 @@ void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
 
     int sID = pUserList->size();
 
+    sFullName = Passenger::fixFullName(sFullName);
+
     Passenger transmitter(sFullName, sPassportInfo.toStdString(), sID);
     pPassList->push_back(transmitter);
 

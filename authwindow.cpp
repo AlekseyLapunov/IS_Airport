@@ -8,7 +8,7 @@ AuthWindow::AuthWindow(QWidget *parent) :
     ui(new Ui::AuthWindow)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Auth. Window");
+    this->setWindowTitle("Авторизация");
     DataBases::checkForDir();
 }
 
@@ -68,15 +68,35 @@ void AuthWindow::accept()
     // Проверка полей на правильность ввода
     if(this->checkFields())
     {
-        if(getLoginString() == "admintools" && getPasswordString() == "30112020_nebula")
+        if(getLoginString() == "admintools" && getPasswordString() == "30112020")
         {
-           DBManagerPtr->createAdmin("root", "standart_#");
-           adminCreatedBox();
+           if(DBManagerPtr->loginFound("root"))
+           {
+               QMessageBox mBox;
+               mBox.setWindowTitle(tr("Ошибка"));
+               mBox.setIcon(QMessageBox::Critical);
+               mBox.setText(tr("Корневой администратор уже создан"));
+               mBox.exec();
+           }
+           else
+           {
+            DBManagerPtr->createAdmin("root", "standart#");
+            AuthWindow::adminCreatedBox();
+           }
         }
+        else
         if(DBManagerPtr->find(getLoginString().toStdString(), getPasswordString().toStdString(), *userPtr))
         {
             DBManagerPtr->find(userPtr->getID(), *passPtr);
             QDialog::accept();
+        }
+        else
+        {
+            QMessageBox warning;
+            warning.setWindowTitle("Ошибка");
+            warning.setText("Не удалось найти пользователя с такой<br> комбинацией логина и пароля");
+            warning.setIcon(QMessageBox::Critical);
+            warning.exec();
         }
     }
     else return;
