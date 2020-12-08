@@ -17,6 +17,9 @@ public:
     // Функция находит пользователя в базе данных
     static bool find(string login, string password, User &fUser);
 
+    // Функция находит пользователя в базе данных
+    static bool find(int id, string login, User &fUser);
+
     // Функция находит логин в базе данных
     static bool find(string login);
 

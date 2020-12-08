@@ -22,11 +22,17 @@ void UsersViewWindow::giveDBManagerPtr(DataBases *DBPointer)
 
 void UsersViewWindow::giveListPtr(QList<User> *sUserListPtr)
 {
-    usersToShow = *sUserListPtr;
+    userListPtr = sUserListPtr;
+}
+
+void UsersViewWindow::refreshListPtr()
+{
+    usersToShow = *userListPtr;
 }
 
 void UsersViewWindow::fillTable()
 {
+    refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(usersToShow.size());
     QModelIndex index;
@@ -42,3 +48,38 @@ void UsersViewWindow::fillTable()
         table->setData(index, usersToShow[row].getTypeString());
     }
 }
+
+void UsersViewWindow::editUser(QModelIndex index)
+{
+    int curRowNumber = index.row();
+    userChanged = false;
+    QModelIndex temp = table->index(curRowNumber, 0);
+    int ID = table->data(temp).toInt();
+    temp = table->index(curRowNumber, 1);
+    QString login = table->data(temp).toString();
+    DBManagerPtr->find(ID, login.toStdString(), userFound);
+    editUserWindow.giveUserPtr(&userFound);
+    editUserWindow.giveDBManagerPtr(DBManagerPtr);
+    editUserWindow.giveBoolPtr(&userChanged);
+    editUserWindow.setFields();
+    editUserWindow.exec();
+    if(userChanged)
+    {
+        string sPassword = userFound.getPassword();
+        int sType = userFound.getType();
+        DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType, userListPtr);
+        fillTable();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

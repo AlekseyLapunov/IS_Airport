@@ -49,8 +49,8 @@ void MainWindow::setNulls()
 void MainWindow::viewUsers()
 {
     usersWindow.giveListPtr(&UsersList);
-    usersWindow.show();
     usersWindow.fillTable();
+    usersWindow.exec();
 }
 
 void MainWindow::manageWidgets()

@@ -28,10 +28,34 @@ bool DataBases::find(int id, Passenger &ptr)
     else return false;
 }
 
+bool DataBases::find(int id, string login, User &ptr)
+{
+    if(UsersBase::find(id, login, ptr)) return true;
+    else return false;
+}
+
 bool DataBases::passFound(QString passInfo)
 {
     if(PassengersBase::find(passInfo.toStdString())) return true;
     else return false;
+}
+
+bool DataBases::changeUserInfo(int cID, string cLogin, string cPassword, int cType, QList<User> *users)
+{
+    pUserList = users;
+    for(int i = 0; i < (int)pUserList->size(); i++)
+    {
+        User temp = pUserList->at(i);
+        if(temp.getID() == cID && temp.getLogin() == cLogin)
+        {
+            User changeBy(cLogin, cPassword, cID, cType);
+            pUserList->removeAt(i);
+            pUserList->insert(i, changeBy);
+            UsersBase::refreshBase(*pUserList);
+            return true;
+        }
+    }
+    return false;
 }
 
 void DataBases::createAdmin(string sLogin, string sPassword)

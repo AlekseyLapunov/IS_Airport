@@ -8,6 +8,8 @@
 #include <string>
 #include <QString>
 #include <QList>
+#include <QMessageBox>
+#include <edituserwindow.h>
 
 namespace Ui {
 class UsersViewWindow;
@@ -22,13 +24,24 @@ public:
     ~UsersViewWindow();
 
     void giveDBManagerPtr(DataBases *DBPointer);
-    void giveListPtr(QList<User> *userListPtr);
+    void giveListPtr(QList<User> *sUserListPtr);
     void fillTable();
+
+private slots:
+    void editUser(QModelIndex);
 
 private:
     DataBases *DBManagerPtr;
 
     QList<User> usersToShow;
+    QList<User> *userListPtr;
+
+    void refreshListPtr();
+
+    User userFound;
+    bool userChanged;
+
+    EditUserWindow editUserWindow;
 
     Ui::UsersViewWindow *ui;
     QStandardItemModel *table;

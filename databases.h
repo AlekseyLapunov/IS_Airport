@@ -22,9 +22,12 @@ public:
 
     bool find(string login, string password, User &ptr);
     bool find(int id, Passenger &ptr);
+    bool find(int id, string login, User &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
+
+    bool changeUserInfo(int cID, string cLogin, string cPassword, int cType, QList<User> *users);
 
     void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);
@@ -32,7 +35,8 @@ public:
 
     void loadAllBase();
 
-    void setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets);
+    void setListPointers(QList<User> *users, QList<Passenger> *passes,
+                         QList<Route> *routes, QList<Ticket> *tickets);
 private:
 
     QList<User> *pUserList;
