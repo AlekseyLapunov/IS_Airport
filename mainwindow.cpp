@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    MainWindow::setNulls();
     delete ui;
 }
 
