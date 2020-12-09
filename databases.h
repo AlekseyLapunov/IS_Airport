@@ -27,7 +27,7 @@ public:
     bool loginFound(string login);
     bool passFound(QString passInfo);
 
-    bool changeUserInfo(int cID, string cLogin, string cPassword, int cType, QList<User> *users);
+    bool changeUserInfo(int cID, string cLogin, string cPassword, int cType);
 
     void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);

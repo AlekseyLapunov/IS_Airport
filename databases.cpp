@@ -40,9 +40,9 @@ bool DataBases::passFound(QString passInfo)
     else return false;
 }
 
-bool DataBases::changeUserInfo(int cID, string cLogin, string cPassword, int cType, QList<User> *users)
+bool DataBases::changeUserInfo(int cID, string cLogin, string cPassword, int cType)
 {
-    pUserList = users;
+
     for(int i = 0; i < (int)pUserList->size(); i++)
     {
         User temp = pUserList->at(i);

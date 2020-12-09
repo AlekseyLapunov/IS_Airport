@@ -12,6 +12,9 @@ UsersViewWindow::UsersViewWindow(QWidget *parent) :
 
 UsersViewWindow::~UsersViewWindow()
 {
+    DBManagerPtr = nullptr;
+    userListPtr = nullptr;
+    usersToShow.clear();
     delete ui;
 }
 
@@ -67,7 +70,7 @@ void UsersViewWindow::editUser(QModelIndex index)
     {
         string sPassword = userFound.getPassword();
         int sType = userFound.getType();
-        DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType, userListPtr);
+        DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType);
         fillTable();
     }
 }

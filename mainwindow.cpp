@@ -49,6 +49,7 @@ void MainWindow::setNulls()
 
 void MainWindow::viewUsers()
 {
+    usersWindow.giveDBManagerPtr(&DBManager);
     usersWindow.giveListPtr(&UsersList);
     usersWindow.fillTable();
     usersWindow.exec();
@@ -85,10 +86,7 @@ void MainWindow::showCurrent()
     QString login = QString::fromStdString(currentUser.getLogin());
     QString password = QString::fromStdString(currentUser.getPassword());
     int ID = currentUser.getID();
-    int type = currentUser.getType();
-    QString typeName;
-    if(type == User::idAdministrator) typeName = "Admin";
-    if(type == User::idPassenger) typeName = "Passenger";
+    QString typeName = currentUser.getTypeString();
     mBox.setText(tr("Login: %1 <br>"
                     "Password: %2 <br>"
                     "ID: %3 <br>"
