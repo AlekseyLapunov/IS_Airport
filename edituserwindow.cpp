@@ -48,6 +48,7 @@ void EditUserWindow::setFields()
     if(userPtr)
     {
         ui->loginEdit->setText(QString::fromStdString(userPtr->getLogin()));
+        ui->loginEdit->setDisabled(true);
         ui->passwordEdit->setText(QString::fromStdString(userPtr->getPassword()));
         ui->typeEdit->setCurrentIndex(userPtr->getType());
     }

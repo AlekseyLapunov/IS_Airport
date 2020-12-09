@@ -42,7 +42,6 @@ bool DataBases::passFound(QString passInfo)
 
 bool DataBases::changeUserInfo(int cID, string cLogin, string cPassword, int cType)
 {
-
     for(int i = 0; i < (int)pUserList->size(); i++)
     {
         User temp = pUserList->at(i);
@@ -52,6 +51,23 @@ bool DataBases::changeUserInfo(int cID, string cLogin, string cPassword, int cTy
             pUserList->removeAt(i);
             pUserList->insert(i, changeBy);
             UsersBase::refreshBase(*pUserList);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DataBases::changePassInfo(int cID, QString cFullName, string cPassport)
+{
+    for(int i = 0; i < (int)pPassList->size(); i++)
+    {
+        Passenger temp = pPassList->at(i);
+        if(temp.getID() == cID && temp.getFullName() == cFullName)
+        {
+            Passenger changeBy(cFullName, cPassport, cID);
+            pPassList->removeAt(i);
+            pPassList->insert(i, changeBy);
+            PassengersBase::refreshBase(*pPassList);
             return true;
         }
     }

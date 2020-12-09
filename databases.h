@@ -28,6 +28,7 @@ public:
     bool passFound(QString passInfo);
 
     bool changeUserInfo(int cID, string cLogin, string cPassword, int cType);
+    bool changePassInfo(int cID, QString cFullName, string cPassport);
 
     void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);

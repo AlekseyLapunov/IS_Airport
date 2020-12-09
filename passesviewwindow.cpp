@@ -53,25 +53,21 @@ void PassesViewWindow::fillTable()
 
 void PassesViewWindow::editPass(QModelIndex index)
 {
-    /*
     int curRowNumber = index.row();
-    userChanged = false;
+    passChanged = false;
     QModelIndex temp = table->index(curRowNumber, 0);
     int ID = table->data(temp).toInt();
-    temp = table->index(curRowNumber, 1);
-    QString login = table->data(temp).toString();
-    DBManagerPtr->find(ID, login.toStdString(), userFound);
-    editUserWindow.giveUserPtr(&userFound);
-    editUserWindow.giveDBManagerPtr(DBManagerPtr);
-    editUserWindow.giveBoolPtr(&userChanged);
-    editUserWindow.setFields();
-    editUserWindow.exec();
-    if(userChanged)
+    DBManagerPtr->find(ID, passFound);
+    editPassWindow.givePassPtr(&passFound);
+    editPassWindow.giveDBManagerPtr(DBManagerPtr);
+    editPassWindow.giveBoolPtr(&passChanged);
+    editPassWindow.setFields();
+    editPassWindow.exec();
+    if(passChanged)
     {
-        string sPassword = userFound.getPassword();
-        int sType = userFound.getType();
-        DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType);
+        QString sFullName = passFound.getFullName();
+        string sPassport = passFound.getPassport().toStdString();
+        DBManagerPtr->changePassInfo(ID, sFullName, sPassport);
         fillTable();
     }
-    */
 }

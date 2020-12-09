@@ -9,7 +9,7 @@
 #include <QString>
 #include <QList>
 #include <QMessageBox>
-#include <edituserwindow.h>
+#include <editpasswindow.h>
 
 namespace Ui {
 class PassesViewWindow;
@@ -38,10 +38,10 @@ private:
 
     void refreshListPtr();
 
-    User userFound;
-    bool userChanged;
+    Passenger passFound;
+    bool passChanged;
 
-    //EditUserWindow editUserWindow;
+    EditPassWindow editPassWindow;
     QStandardItemModel *table;
 
     Ui::PassesViewWindow *ui;

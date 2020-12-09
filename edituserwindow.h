@@ -27,9 +27,6 @@ private slots:
     void accept() override;
 
 private:
-
-
-
     bool checkFields();
 
     bool *userChanged;

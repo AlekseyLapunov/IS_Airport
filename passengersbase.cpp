@@ -53,7 +53,6 @@ bool PassengersBase::find(int id, Passenger &ptr)
         passBase.close();
     }
     return false;
-    return true;
 }
 
 bool PassengersBase::find(string passportCombination)
