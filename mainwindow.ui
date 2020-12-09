@@ -139,8 +139,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>viewPassesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewPasses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>viewUsers()</slot>
+  <slot>viewPasses()</slot>
  </slots>
 </ui>

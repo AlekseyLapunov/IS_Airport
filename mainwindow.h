@@ -7,6 +7,7 @@
 #include <databases.h>
 #include <QMessageBox>
 #include <usersviewwindow.h>
+#include <passesviewwindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,7 @@ public:
 private slots:
 
     void viewUsers();
+    void viewPasses();
 
 private:
     // Текущий пользователь
@@ -39,7 +41,7 @@ private:
     // Список пользователей
     QList<User> UsersList;
     // Список пассажиров
-    QList<Passenger> PassengerList;
+    QList<Passenger> PassesList;
     // Список билетов
     QList<Ticket> TicketsList;
     // Список рейсов
@@ -55,6 +57,9 @@ private:
     AuthWindow authWindow;
     // Просмотр пользователей
     UsersViewWindow usersWindow;
+    // Просмотр пассажиров
+    PassesViewWindow passesWindow;
+
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

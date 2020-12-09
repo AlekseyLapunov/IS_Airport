@@ -31,7 +31,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::giveAllPtrs()
 {
-    DBManager.setListPointers(&UsersList, &PassengerList,
+    DBManager.setListPointers(&UsersList, &PassesList,
                               &RoutesList, &TicketsList);
     authWindow.giveDBManagerPtr(&DBManager);
     authWindow.giveFlag(authWindowClosed);
@@ -42,7 +42,7 @@ void MainWindow::giveAllPtrs()
 void MainWindow::setNulls()
 {
     UsersList.clear();
-    PassengerList.clear();
+    PassesList.clear();
     TicketsList.clear();
     RoutesList.clear();
 }
@@ -53,6 +53,14 @@ void MainWindow::viewUsers()
     usersWindow.giveListPtr(&UsersList);
     usersWindow.fillTable();
     usersWindow.exec();
+}
+
+void MainWindow::viewPasses()
+{
+    passesWindow.giveDBManagerPtr(&DBManager);
+    passesWindow.giveListPtr(&PassesList);
+    passesWindow.fillTable();
+    passesWindow.exec();
 }
 
 void MainWindow::manageWidgets()
@@ -92,6 +100,7 @@ void MainWindow::showCurrent()
                     "ID: %3 <br>"
                     "Type: %4").arg(login).arg(password).arg(ID).arg(typeName));
     mBox.exec();
+
     QMessageBox mBox2;
     mBox2.setWindowTitle("This pass info");
     QString fullName = currentPass.getFullName();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>UsersViewWindow</class>
- <widget class="QDialog" name="UsersViewWindow">
+ <class>PassesViewWindow</class>
+ <widget class="QDialog" name="PassesViewWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,29 +12,22 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>300</width>
-    <height>200</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
     <width>400</width>
     <height>300</height>
    </size>
   </property>
-  <property name="windowTitle">
-   <string>Просмотр пользователей</string>
+  <property name="maximumSize">
+   <size>
+    <width>600</width>
+    <height>500</height>
+   </size>
   </property>
-  <property name="windowIcon">
-   <iconset resource="icons.qrc">
-    <normaloff>:/new/prefix1/icons1/samolet.jpg</normaloff>:/new/prefix1/icons1/samolet.jpg</iconset>
+  <property name="windowTitle">
+   <string>Dialog</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTableView" name="usersView">
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
+    <widget class="QTableView" name="passesView">
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
@@ -45,15 +38,13 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
-   <sender>usersView</sender>
+   <sender>passesView</sender>
    <signal>activated(QModelIndex)</signal>
-   <receiver>UsersViewWindow</receiver>
-   <slot>editUser(QModelIndex)</slot>
+   <receiver>PassesViewWindow</receiver>
+   <slot>editPass(QModelIndex)</slot>
    <hints>
     <hint type="sourcelabel">
      <x>199</x>
@@ -67,6 +58,6 @@
   </connection>
  </connections>
  <slots>
-  <slot>editUser(QModelIndex)</slot>
+  <slot>editPass(QModelIndex)</slot>
  </slots>
 </ui>

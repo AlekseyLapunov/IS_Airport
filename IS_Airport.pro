@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     passenger.cpp \
     passengersbase.cpp \
+    passesviewwindow.cpp \
     registrywindow.cpp \
     route.cpp \
     routesbase.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     mainwindow.h \
     passenger.h \
     passengersbase.h \
+    passesviewwindow.h \
     registrywindow.h \
     route.h \
     routesbase.h \
@@ -45,6 +47,7 @@ FORMS += \
     authwindow.ui \
     edituserwindow.ui \
     mainwindow.ui \
+    passesviewwindow.ui \
     registrywindow.ui \
     usersviewwindow.ui
 
