@@ -155,9 +155,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>manageRoutesButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>manageRoutes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>viewUsers()</slot>
   <slot>viewPasses()</slot>
+  <slot>manageRoutes()</slot>
  </slots>
 </ui>

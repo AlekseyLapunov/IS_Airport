@@ -24,6 +24,8 @@ public:
     bool find(int id, Passenger &ptr);
     bool find(int id, string login, User &ptr);
     bool find(int routeID, int passID, int status, Ticket &ptr);
+    bool find(int ID, QString dep, QString des,
+              QString mark, int seats, Route &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
@@ -35,6 +37,11 @@ public:
     void pushUser(string sLogin, string sPassword);
     void pushPassenger(QString fullName, QString passInfo);
     void pushTicket(int routeID, int passID, int status);
+    void pushRoute(int ID, QString dep, QString des,
+                   QString mark, int seats);
+
+    void deleteRoute(int ID, QString dep, QString des,
+                     QString mark, int seats);
 
     void loadAllBase();
 

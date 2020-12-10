@@ -69,6 +69,16 @@ void MainWindow::viewPasses()
     }
 }
 
+void MainWindow::manageRoutes()
+{
+    if(this->currentUser.getType() == User::idAdministrator
+            || this->currentUser.getType() == User::idCashier)
+    {
+        manageRoutesWindow.giveDBPtr(&DBManager);
+        manageRoutesWindow.show();
+    }
+}
+
 void MainWindow::manageWidgets()
 {
     setWindowTitle(tr("ИС Аэропорт"));

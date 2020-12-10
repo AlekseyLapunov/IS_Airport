@@ -147,6 +147,7 @@ bool RegistryWindow::checkFullNameField()
         {
             return false;
         }
+    if(fullName[0] == " ") return false;
     if(fullName.count(" ") != 2) return false;
     if(fullName.count("  ") != 0) return false;
     return true;

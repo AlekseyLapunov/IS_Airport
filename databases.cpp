@@ -40,6 +40,12 @@ bool DataBases::find(int routeID, int passID, int status, Ticket &ptr)
     else return false;
 }
 
+bool DataBases::find(int fID, QString fDep, QString fDes, QString fMark, int fSeats, Route &ptr)
+{
+    if(RoutesBase::find(fID, fDep, fDes, fMark, fSeats, ptr)) return true;
+    else return false;
+}
+
 bool DataBases::passFound(QString passInfo)
 {
     if(PassengersBase::find(passInfo.toStdString())) return true;
@@ -133,11 +139,22 @@ void DataBases::pushTicket(int routeID, int passID, int status)
     TicketsBase::refreshBase(*pTicketsList);
 }
 
+void DataBases::pushRoute(int ID, QString dep, QString des, QString mark, int seats)
+{
+    RoutesBase::loadBase(*pRoutesList);
+
+    Route transmitter(ID, dep, des, mark, seats);
+    pRoutesList->push_back(transmitter);
+
+    RoutesBase::refreshBase(*pRoutesList);
+}
+
 void DataBases::loadAllBase()
 {
     UsersBase::loadBase(*pUserList);
     PassengersBase::loadBase(*pPassList);
     TicketsBase::loadBase(*pTicketsList);
+    RoutesBase::loadBase(*pRoutesList);
 }
 
 void DataBases::setListPointers(QList<User> *users, QList<Passenger> *passes, QList<Route> *routes, QList<Ticket> *tickets)
