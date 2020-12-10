@@ -23,6 +23,7 @@ public:
     bool find(string login, string password, User &ptr);
     bool find(int id, Passenger &ptr);
     bool find(int id, string login, User &ptr);
+    bool find(int routeID, int passID, int status, Ticket &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
@@ -33,6 +34,7 @@ public:
     void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);
     void pushPassenger(QString fullName, QString passInfo);
+    void pushTicket(int routeID, int passID, int status);
 
     void loadAllBase();
 

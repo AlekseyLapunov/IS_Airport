@@ -49,18 +49,24 @@ void MainWindow::setNulls()
 
 void MainWindow::viewUsers()
 {
-    usersWindow.giveDBManagerPtr(&DBManager);
-    usersWindow.giveListPtr(&UsersList);
-    usersWindow.fillTable();
-    usersWindow.exec();
+    if(this->currentUser.getType() == User::idAdministrator)
+    {
+        usersWindow.giveDBManagerPtr(&DBManager);
+        usersWindow.giveListPtr(&UsersList);
+        usersWindow.fillTable();
+        usersWindow.exec();
+    }
 }
 
 void MainWindow::viewPasses()
 {
-    passesWindow.giveDBManagerPtr(&DBManager);
-    passesWindow.giveListPtr(&PassesList);
-    passesWindow.fillTable();
-    passesWindow.exec();
+    if(this->currentUser.getType() == User::idAdministrator)
+    {
+        passesWindow.giveDBManagerPtr(&DBManager);
+        passesWindow.giveListPtr(&PassesList);
+        passesWindow.fillTable();
+        passesWindow.exec();
+    }
 }
 
 void MainWindow::manageWidgets()
@@ -80,6 +86,7 @@ void MainWindow::manageWidgets()
     }
     else if (this->currentUser.getType() == User::idPassenger)
     {
+        ui->label->setText(tr("Добро пожаловать, %1").arg(this->currentPass.getFullName()));
         ui->viewUsersButton->setHidden(true);
         ui->viewPassesButton->setHidden(true);
         ui->manageRoutesButton->setHidden(true);
