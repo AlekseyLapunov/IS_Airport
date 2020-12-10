@@ -62,7 +62,7 @@ bool DataBases::changePassInfo(int cID, QString cFullName, string cPassport)
     for(int i = 0; i < (int)pPassList->size(); i++)
     {
         Passenger temp = pPassList->at(i);
-        if(temp.getID() == cID && temp.getFullName() == cFullName)
+        if(temp.getID() == cID)
         {
             Passenger changeBy(cFullName, cPassport, cID);
             pPassList->removeAt(i);
