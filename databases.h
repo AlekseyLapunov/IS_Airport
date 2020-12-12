@@ -26,6 +26,7 @@ public:
     bool find(int routeID, int passID, int status, Ticket &ptr);
     bool find(int ID, QString dep, QString des,
               QString mark, int seats, Route &ptr);
+    bool find(int ID, Route &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
@@ -40,8 +41,7 @@ public:
     void pushRoute(int ID, QString dep, QString des,
                    QString mark, int seats);
 
-    void deleteRoute(int ID, QString dep, QString des,
-                     QString mark, int seats);
+    bool deleteRoute(int rID);
 
     void loadAllBase();
 

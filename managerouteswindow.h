@@ -30,8 +30,10 @@ private:
     enum{creating, deleting};
 
     void setShowMode(bool);
-    void gracBox();
+    void gracBox(int);
+    void existensBox(int);
     void warnBox();
+    void critBox();
     bool checkFields(int);
 
     bool checkIDEdit();
@@ -39,6 +41,8 @@ private:
     bool checkMarkEdit();
     bool checkSeatsEdit();
     DataBases *DBManagePtr;
+
+    Route foundRoute;
 
     Ui::ManageRoutesWindow *ui;
 };

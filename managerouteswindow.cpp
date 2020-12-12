@@ -37,7 +37,11 @@ void ManageRoutesWindow::deleteRoute()
             deletingRoute.setDefaultButton(QMessageBox::Yes);
             if(deletingRoute.exec() == QMessageBox::Yes)
             {
-
+                if(DBManagePtr->find(ui->idEdit->value(), foundRoute))
+                {
+                    if(DBManagePtr->deleteRoute(ui->idEdit->value())) gracBox(deleting);
+                    else critBox();
+                } else existensBox(deleting);
             }
         }
         else warnBox();
@@ -50,7 +54,15 @@ void ManageRoutesWindow::createRoute()
     {
         if(checkFields(creating))
         {
-
+            if(!DBManagePtr->find(ui->idEdit->value(), foundRoute))
+            {
+                int sID = ui->idEdit->value(), seats = ui->seatsEdit->value();
+                QString sDep = ui->depEdit->text(), sDes = ui->desEdit->text(),
+                sMark = ui->markEdit->text();
+                DBManagePtr->pushRoute(sID, sDep, sDes, sMark, seats);
+                gracBox(creating);
+            }
+            else existensBox(creating);
         }
         else warnBox();
     }
@@ -75,12 +87,41 @@ void ManageRoutesWindow::setShowMode(bool flag)
     ui->label_5->setDisabled(flag);
 }
 
+void ManageRoutesWindow::gracBox(int flag)
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Поздравляем!"));
+    mBox.setIcon(QMessageBox::Information);
+    if(flag == creating) mBox.setText(tr("Маршрут успешно создан."));
+    else mBox.setText(tr("Маршрут успешно удалён."));
+    mBox.exec();
+}
+
+void ManageRoutesWindow::existensBox(int flag)
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Внимание"));
+    mBox.setIcon(QMessageBox::Warning);
+    if(flag == creating) mBox.setText(tr("Маршрут с таким ID уже создан"));
+    else mBox.setText(tr("Маршрут с таким ID отсутствует в базе данных"));
+    mBox.exec();
+}
+
 void ManageRoutesWindow::warnBox()
 {
     QMessageBox mBox;
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
+    mBox.exec();
+}
+
+void ManageRoutesWindow::critBox()
+{
+    QMessageBox mBox;
+    mBox.setWindowTitle(tr("Ошибка"));
+    mBox.setIcon(QMessageBox::Critical);
+    mBox.setText(tr("Удаление маршрута не удалось"));
     mBox.exec();
 }
 

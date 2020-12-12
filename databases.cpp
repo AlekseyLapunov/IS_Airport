@@ -46,6 +46,12 @@ bool DataBases::find(int fID, QString fDep, QString fDes, QString fMark, int fSe
     else return false;
 }
 
+bool DataBases::find(int fID, Route &ptr)
+{
+    if(RoutesBase::find(fID, ptr)) return true;
+    else return false;
+}
+
 bool DataBases::passFound(QString passInfo)
 {
     if(PassengersBase::find(passInfo.toStdString())) return true;
@@ -147,6 +153,23 @@ void DataBases::pushRoute(int ID, QString dep, QString des, QString mark, int se
     pRoutesList->push_back(transmitter);
 
     RoutesBase::refreshBase(*pRoutesList);
+}
+
+bool DataBases::deleteRoute(int rID)
+{
+    RoutesBase::loadBase(*pRoutesList);
+
+    for(int i = 0; i < (int)pRoutesList->size(); i++)
+    {
+        Route temp = pRoutesList->at(i);
+        if(temp.getID() == rID)
+        {
+            pRoutesList->removeAt(i);
+            RoutesBase::refreshBase(*pRoutesList);
+            return true;
+        }
+    }
+    return false;
 }
 
 void DataBases::loadAllBase()
