@@ -69,6 +69,14 @@ void MainWindow::viewPasses()
     }
 }
 
+void MainWindow::viewRoutes()
+{
+    routesWindow.giveDBManagerPtr(&DBManager);
+    routesWindow.giveListPtr(&RoutesList);
+    routesWindow.fillTable();
+    routesWindow.exec();
+}
+
 void MainWindow::manageRoutes()
 {
     if(this->currentUser.getType() == User::idAdministrator

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <usersviewwindow.h>
 #include <passesviewwindow.h>
+#include <routesviewwindow.h>
 #include <managerouteswindow.h>
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +34,7 @@ private slots:
     void viewUsers();
     void viewPasses();
     void manageRoutes();
+    void viewRoutes();
 
 private:
     // Текущий пользователь
@@ -61,6 +63,8 @@ private:
     UsersViewWindow usersWindow;
     // Окно просмотра пассажиров
     PassesViewWindow passesWindow;
+    // Окно просмотра рейсов
+    RoutesViewWindow routesWindow;
     // Окно Создания/Удаления рейсов
     ManageRoutesWindow manageRoutesWindow;
 
