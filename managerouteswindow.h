@@ -1,10 +1,11 @@
-#ifndef MANAGEROUTESWINDOW_H
+﻿#ifndef MANAGEROUTESWINDOW_H
 #define MANAGEROUTESWINDOW_H
 
 #include <QWidget>
 #include <databases.h>
 #include <QString>
 #include <QMessageBox>
+#include <QDialog>
 
 namespace Ui {
 class ManageRoutesWindow;

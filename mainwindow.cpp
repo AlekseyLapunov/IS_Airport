@@ -51,6 +51,8 @@ void MainWindow::viewUsers()
 {
     if(this->currentUser.getType() == User::idAdministrator)
     {
+        // Окно просмотра пользователей
+        UsersViewWindow usersWindow;
         usersWindow.giveDBManagerPtr(&DBManager);
         usersWindow.giveListPtr(&UsersList);
         usersWindow.fillTable();
@@ -62,6 +64,8 @@ void MainWindow::viewPasses()
 {
     if(this->currentUser.getType() == User::idAdministrator)
     {
+        // Окно просмотра пассажиров
+        PassesViewWindow passesWindow;
         passesWindow.giveDBManagerPtr(&DBManager);
         passesWindow.giveListPtr(&PassesList);
         passesWindow.fillTable();
@@ -71,10 +75,20 @@ void MainWindow::viewPasses()
 
 void MainWindow::viewRoutes()
 {
+    // Окно просмотра рейсов
+    RoutesViewWindow routesWindow;
     routesWindow.giveDBManagerPtr(&DBManager);
     routesWindow.giveListPtr(&RoutesList);
     routesWindow.fillTable();
     routesWindow.exec();
+}
+
+void MainWindow::doRequest()
+{
+    TicketRequestWindow tReqWindow;
+    tReqWindow.giveDBManagePtr(&DBManager);
+    tReqWindow.giveUserPtr(&currentUser);
+    tReqWindow.exec();
 }
 
 void MainWindow::manageRoutes()
@@ -82,8 +96,10 @@ void MainWindow::manageRoutes()
     if(this->currentUser.getType() == User::idAdministrator
             || this->currentUser.getType() == User::idCashier)
     {
-        manageRoutesWindow.giveDBPtr(&DBManager);
-        manageRoutesWindow.show();
+        // Окно Создания/Удаления рейсов
+        ManageRoutesWindow *manageRoutesWindow = new ManageRoutesWindow();
+        manageRoutesWindow->giveDBPtr(&DBManager);
+        manageRoutesWindow->show();
     }
 }
 

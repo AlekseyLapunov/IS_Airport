@@ -17,6 +17,8 @@ public:
 
     // Функция находит билет в базе данных
     static bool find(int fRouteID, int fPassID, int fStatus, Ticket &fTicket);
+    // Функция находит билет в базе данных
+    static bool find(int fRouteID, int fPassID, Ticket &fTicket);
 
     static void refreshBase(QList<Ticket> &pTicketList);
 

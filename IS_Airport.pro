@@ -24,6 +24,7 @@ SOURCES += \
     routesbase.cpp \
     routesviewwindow.cpp \
     ticket.cpp \
+    ticketrequestwindow.cpp \
     ticketsbase.cpp \
     user.cpp \
     usersbase.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     routesbase.h \
     routesviewwindow.h \
     ticket.h \
+    ticketrequestwindow.h \
     ticketsbase.h \
     user.h \
     usersbase.h \
@@ -58,6 +60,7 @@ FORMS += \
     passesviewwindow.ui \
     registrywindow.ui \
     routesviewwindow.ui \
+    ticketrequestwindow.ui \
     usersviewwindow.ui
 
 # Default rules for deployment.

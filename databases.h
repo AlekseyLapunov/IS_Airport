@@ -24,6 +24,7 @@ public:
     bool find(int id, Passenger &ptr);
     bool find(int id, string login, User &ptr);
     bool find(int routeID, int passID, int status, Ticket &ptr);
+    bool find(int routeID, int passID, Ticket &ptr);
     bool find(int ID, QString dep, QString des,
               QString mark, int seats, Route &ptr);
     bool find(int ID, Route &ptr);
@@ -44,6 +45,8 @@ public:
     bool deleteRoute(int rID);
 
     void loadAllBase();
+
+    bool changeTicket(int cRouteID, int cPassID, int cStatus);
 
     void setListPointers(QList<User> *users, QList<Passenger> *passes,
                          QList<Route> *routes, QList<Ticket> *tickets);

@@ -40,6 +40,12 @@ bool DataBases::find(int routeID, int passID, int status, Ticket &ptr)
     else return false;
 }
 
+bool DataBases::find(int routeID, int passID, Ticket &ptr)
+{
+    if(TicketsBase::find(routeID, passID, ptr)) return true;
+    else return false;
+}
+
 bool DataBases::find(int fID, QString fDep, QString fDes, QString fMark, int fSeats, Route &ptr)
 {
     if(RoutesBase::find(fID, fDep, fDes, fMark, fSeats, ptr)) return true;
@@ -86,6 +92,23 @@ bool DataBases::changePassInfo(int cID, QString cFullName, string cPassport)
             pPassList->removeAt(i);
             pPassList->insert(i, changeBy);
             PassengersBase::refreshBase(*pPassList);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DataBases::changeTicket(int cRouteID, int cPassID, int cStatus)
+{
+    for(int i = 0; i < (int)pTicketsList->size(); i++)
+    {
+        Ticket temp = pTicketsList->at(i);
+        if(temp.getRouteID() == cRouteID && temp.getPassID() == cPassID)
+        {
+            Ticket changeBy(cRouteID, cPassID, cStatus);
+            pTicketsList->removeAt(i);
+            pTicketsList->insert(i, changeBy);
+            TicketsBase::refreshBase(*pTicketsList);
             return true;
         }
     }

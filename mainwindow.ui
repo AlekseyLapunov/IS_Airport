@@ -187,11 +187,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>makeRequestButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>doRequest()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>viewUsers()</slot>
   <slot>viewPasses()</slot>
   <slot>manageRoutes()</slot>
   <slot>viewRoutes()</slot>
+  <slot>doRequest()</slot>
  </slots>
 </ui>
