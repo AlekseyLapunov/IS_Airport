@@ -82,7 +82,4 @@
    </hints>
   </connection>
  </connections>
- <slots>
-  <slot>editUser(QModelIndex)</slot>
- </slots>
 </ui>

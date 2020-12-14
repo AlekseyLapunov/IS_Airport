@@ -21,6 +21,9 @@ public:
     void giveListPtr(QList<Ticket> *sTicketListPtr);
     void fillTable();
 
+private slots:
+    void answerToReq(QModelIndex);
+
 private:
     DataBases *DBManagerPtr;
 
@@ -28,6 +31,9 @@ private:
     QList<Ticket> *ticketsListPtr;
 
     void refreshListPtr();
+    int defineStatus(QString ticketStatus);
+    void gracBox();
+    void critBox();
 
     QStandardItemModel *table;
 

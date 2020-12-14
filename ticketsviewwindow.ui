@@ -39,7 +39,7 @@
       <bool>false</bool>
      </property>
      <property name="selectionMode">
-      <enum>QAbstractItemView::NoSelection</enum>
+      <enum>QAbstractItemView::SingleSelection</enum>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -81,8 +81,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ticketsView</sender>
+   <signal>activated(QModelIndex)</signal>
+   <receiver>TicketsViewWindow</receiver>
+   <slot>answerToReq(QModelIndex)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>editUser(QModelIndex)</slot>
+  <slot>answerToReq(QModelIndex)</slot>
  </slots>
 </ui>
