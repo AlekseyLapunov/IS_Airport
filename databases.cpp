@@ -211,6 +211,20 @@ void DataBases::setListPointers(QList<User> *users, QList<Passenger> *passes, QL
     pTicketsList = tickets;
 }
 
+void DataBases::setPassData(int userID, Passenger &pass)
+{
+    for(int i = 0; i < (int) pUserList->size(); i++)
+    {
+        User temp = pUserList->at(i);
+        if(temp.getID() == userID)
+        {
+            pass.setLogin(temp.getLogin());
+            pass.setPassword(temp.getPassword());
+            return;
+        }
+    }
+}
+
 
 
 

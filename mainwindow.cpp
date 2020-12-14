@@ -19,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
        MainWindowClosed = false;
        MainWindow::manageWidgets();
        this->show();
-       MainWindow::showCurrent();
+       if(currentUser.getType() == User::idPassenger)
+       DBManager.setPassData(currentUser.getID(), currentPass);
    }
 }
 
@@ -70,6 +71,19 @@ void MainWindow::viewPasses()
         passesWindow.giveListPtr(&PassesList);
         passesWindow.fillTable();
         passesWindow.exec();
+    }
+}
+
+void MainWindow::viewMyInfo()
+{
+    if(this->currentUser.getType() == User::idPassenger)
+    {
+        // Окно просмотра пассажиров
+        MyInfoWindow myInfoWindow;
+        myInfoWindow.giveTicketsListPtr(&TicketsList);
+        myInfoWindow.givePassPtr(&currentPass);
+        myInfoWindow.fillTable();
+        myInfoWindow.exec();
     }
 }
 

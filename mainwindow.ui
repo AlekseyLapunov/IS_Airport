@@ -256,6 +256,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>myInfoButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewMyInfo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>viewUsers()</slot>
@@ -265,5 +281,6 @@
   <slot>doRequest()</slot>
   <slot>viewTickets()</slot>
   <slot>quit()</slot>
+  <slot>viewMyInfo()</slot>
  </slots>
 </ui>

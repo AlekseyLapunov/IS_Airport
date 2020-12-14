@@ -45,3 +45,13 @@ QString Passenger::getPassport()
 {
     return QString::fromStdString(passportInfo);
 }
+
+void Passenger::setLogin(std::string sLogin)
+{
+    this->login = sLogin;
+}
+
+void Passenger::setPassword(std::string sPassword)
+{
+    this->password = sPassword;
+}

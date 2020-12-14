@@ -50,6 +50,8 @@ public:
 
     void setListPointers(QList<User> *users, QList<Passenger> *passes,
                          QList<Route> *routes, QList<Ticket> *tickets);
+
+    void setPassData(int userID, Passenger &pass);
 private:
 
     QList<User> *pUserList;

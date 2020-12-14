@@ -12,6 +12,7 @@
 #include <managerouteswindow.h>
 #include <ticketrequestwindow.h>
 #include <ticketsviewwindow.h>
+#include <myinfowindow.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -35,6 +36,7 @@ private slots:
 
     void viewUsers();
     void viewPasses();
+    void viewMyInfo();
     void manageRoutes();
     void viewRoutes();
     void viewTickets();
