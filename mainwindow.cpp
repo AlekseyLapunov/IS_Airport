@@ -83,12 +83,40 @@ void MainWindow::viewRoutes()
     routesWindow.exec();
 }
 
+void MainWindow::viewTickets()
+{
+    if(currentUser.getType() == User::idAdministrator
+       || currentUser.getType() == User::idCashier)
+    {
+        // Окно просмотра рейсов
+        TicketsViewWindow ticketsWindow;
+        ticketsWindow.giveDBManagerPtr(&DBManager);
+        ticketsWindow.giveListPtr(&TicketsList);
+        ticketsWindow.fillTable();
+        ticketsWindow.exec();
+    }
+}
+
 void MainWindow::doRequest()
 {
     TicketRequestWindow tReqWindow;
     tReqWindow.giveDBManagePtr(&DBManager);
     tReqWindow.giveUserPtr(&currentUser);
     tReqWindow.exec();
+}
+
+void MainWindow::quit()
+{
+    QMessageBox quitBox(this);
+    quitBox.setIcon(QMessageBox::Question);
+    quitBox.setWindowTitle("Выход");
+    quitBox.setText(tr("Вы уверены, что хотите<br> выйти из программы?"));
+    quitBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    quitBox.setDefaultButton(QMessageBox::Yes);
+    if(quitBox.exec() == QMessageBox::Yes)
+    {
+        QApplication::quit();
+    }
 }
 
 void MainWindow::manageRoutes()

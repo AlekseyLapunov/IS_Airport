@@ -116,8 +116,29 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Меню</string>
+    </property>
+    <addaction name="exit"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="exit">
+   <property name="text">
+    <string>Выйти</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="icons.qrc"/>
@@ -203,6 +224,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>viewRequestsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewTickets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>quit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>viewUsers()</slot>
@@ -210,5 +263,7 @@
   <slot>manageRoutes()</slot>
   <slot>viewRoutes()</slot>
   <slot>doRequest()</slot>
+  <slot>viewTickets()</slot>
+  <slot>quit()</slot>
  </slots>
 </ui>
