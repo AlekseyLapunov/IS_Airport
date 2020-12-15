@@ -1,5 +1,5 @@
 #include "PassesViewWindow.h"
-#include "ui_passesviewwindow.h"
+#include "ui_PassesViewWindow.h"
 
 PassesViewWindow::PassesViewWindow(QWidget *parent) :
     QDialog(parent),

@@ -26,7 +26,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void showCurrent();
     bool MainWindowClosed = true;
     bool authWindowClosed = false;
 
@@ -42,6 +41,7 @@ private slots:
     void viewTickets();
     void doRequest();
     void quit();
+    void tellAbout();
 
 private:
     // Текущий пользователь
@@ -61,7 +61,7 @@ private:
     void manageWidgets();
     void giveAllPtrs();
 
-    // Взаимодействие с базами данных
+    // Объект взаимодействия с базами данных
     DataBases DBManager;
 
     // Окно авторизации

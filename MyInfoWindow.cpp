@@ -1,5 +1,5 @@
 #include "MyInfoWindow.h"
-#include "ui_myinfowindow.h"
+#include "ui_MyInfoWindow.h"
 
 MyInfoWindow::MyInfoWindow(QWidget *parent) :
     QDialog(parent),

@@ -1,5 +1,5 @@
 #include "UsersViewWindow.h"
-#include "ui_usersviewwindow.h"
+#include "ui_UsersViewWindow.h"
 
 UsersViewWindow::UsersViewWindow(QWidget *parent) :
     QDialog(parent),

@@ -1,5 +1,5 @@
 #include "EditUserWindow.h"
-#include "ui_edituserwindow.h"
+#include "ui_EditUserWindow.h"
 
 #include <QMessageBox>
 
@@ -56,7 +56,7 @@ void EditUserWindow::setFields()
 
 bool EditUserWindow::checkFields()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));

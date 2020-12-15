@@ -34,7 +34,7 @@ bool UsersBase::find(string fLogin, string fPassword, User &fUser)
     return false;
 }
 
-bool UsersBase::find(int fID, string fLogin, User &fUser)
+bool UsersBase::find(int fId, string fLogin, User &fUser)
 {
     QFile usersBase("Data_Bases/Users_Base.bin");
     if(usersBase.open(QIODevice::ReadOnly))
@@ -44,7 +44,29 @@ bool UsersBase::find(int fID, string fLogin, User &fUser)
         {
             int id, type; QString login; QString password;
             qstream >> login >> password >> id >> type;
-            if((login.toStdString() == fLogin) && (id == fID))
+            if(login.toStdString() == fLogin && id == fId)
+            {
+                User foundUser(login.toStdString(), password.toStdString(), id, type);
+                fUser = foundUser;
+                return true;
+            }
+        }
+        usersBase.close();
+    }
+    return false;
+}
+
+bool UsersBase::find(string fLogin, User &fUser)
+{
+    QFile usersBase("Data_Bases/Users_Base.bin");
+    if(usersBase.open(QIODevice::ReadOnly))
+    {
+        QDataStream qstream(&usersBase);
+        while(!qstream.atEnd())
+        {
+            int id, type; QString login; QString password;
+            qstream >> login >> password >> id >> type;
+            if(login.toStdString() == fLogin)
             {
                 User foundUser(login.toStdString(), password.toStdString(), id, type);
                 fUser = foundUser;

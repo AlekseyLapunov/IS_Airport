@@ -1,5 +1,5 @@
 #include "TicketRequestWindow.h"
-#include "ui_ticketrequestwindow.h"
+#include "ui_TicketRequestWindow.h"
 
 #include <QMessageBox>
 
@@ -61,7 +61,7 @@ void TicketRequestWindow::ticketToReturn()
 
 void TicketRequestWindow::warnBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Такого маршрута не существует"));
@@ -70,7 +70,7 @@ void TicketRequestWindow::warnBox()
 
 void TicketRequestWindow::gracBox(int flag)
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
     if(flag == req) mBox.setText(tr("Запрос билета со статусом \"Покупка\" создан"));

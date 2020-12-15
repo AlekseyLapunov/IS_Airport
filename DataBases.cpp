@@ -11,6 +11,7 @@ void DataBases::checkForDir()
     if(!dataBasesFolder.exists("Data_Bases"))
     {
         dataBasesFolder.mkdir("Data_Bases");
+        createHintFile();
         return;
     }
     else return;
@@ -55,6 +56,12 @@ bool DataBases::find(int fID, QString fDep, QString fDes, QString fMark, int fSe
 bool DataBases::find(int fID, Route &ptr)
 {
     if(RoutesBase::find(fID, ptr)) return true;
+    else return false;
+}
+
+bool DataBases::find(string login, User &ptr)
+{
+    if(UsersBase::find(login, ptr)) return true;
     else return false;
 }
 
@@ -222,6 +229,19 @@ void DataBases::setPassData(int userID, Passenger &pass)
             pass.setPassword(temp.getPassword());
             return;
         }
+    }
+}
+
+void DataBases::createHintFile()
+{
+    QFile hint("Data_Bases/hint.txt");
+    if (hint.open(QIODevice::WriteOnly | QIODevice::Append))
+    {
+        hint.write("Чтобы создать корневого администратора, заполните поля следующим образом:\n"
+                   "admintools\n"
+                   "30112020\n"
+                   "(Используйте окно авторизации)");
+        hint.close();
     }
 }
 

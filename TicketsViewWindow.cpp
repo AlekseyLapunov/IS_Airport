@@ -1,5 +1,5 @@
 #include "TicketsViewWindow.h"
-#include "ui_ticketsviewwindow.h"
+#include "ui_TicketsViewWindow.h"
 #include <QMessageBox>
 
 TicketsViewWindow::TicketsViewWindow(QWidget *parent) :
@@ -65,22 +65,22 @@ void TicketsViewWindow::answerToReq(QModelIndex index)
     Ticket ticketFound;
     DBManagerPtr->find(routeID, passID, ticketFound);
 
-    QMessageBox quitBox(this);
-    quitBox.setIcon(QMessageBox::Question);
+    QMessageBox answerBox(this);
+    answerBox.setIcon(QMessageBox::Question);
     if(statusInt == Ticket::stReqAns || statusInt == Ticket::stRetAns)
     {
-        quitBox.setWindowTitle("Ответ");
-        quitBox.setText(tr("Вы уверены, что хотите<br> подтвердить запрос?"));
+        answerBox.setWindowTitle("Ответ");
+        answerBox.setText(tr("Вы уверены, что хотите<br> подтвердить запрос?"));
     }
     else
     {
-        quitBox.setWindowTitle("Отклонение");
-        quitBox.setText(tr("Вы уверены, что хотите<br> вернуть запрос?"));
+        answerBox.setWindowTitle("Отклонение");
+        answerBox.setText(tr("Вы уверены, что хотите<br> вернуть запрос?"));
     }
     if(statusInt)
-    quitBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
-    quitBox.setDefaultButton(QMessageBox::Yes);
-    if(quitBox.exec() == QMessageBox::Yes)
+    answerBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    answerBox.setDefaultButton(QMessageBox::Yes);
+    if(answerBox.exec() == QMessageBox::Yes)
     {
         if(DBManagerPtr->changeTicket(routeID, passID, statusInt))
         {
@@ -93,7 +93,7 @@ void TicketsViewWindow::answerToReq(QModelIndex index)
 
 void TicketsViewWindow::gracBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
     mBox.setText(tr("Запрос был обработан успешно"));
@@ -102,7 +102,7 @@ void TicketsViewWindow::gracBox()
 
 void TicketsViewWindow::critBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Ошибка"));
     mBox.setIcon(QMessageBox::Critical);
     mBox.setText(tr("Запрос не был обработан<br> по непредвиденной причине"));

@@ -1,5 +1,5 @@
 #include "EditPassWindow.h"
-#include "ui_editpasswindow.h"
+#include "ui_EditPassWindow.h"
 #include <QMessageBox>
 #include <QRegularExpression>
 
@@ -53,7 +53,7 @@ void EditPassWindow::setFields()
 
 bool EditPassWindow::checkFields()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));

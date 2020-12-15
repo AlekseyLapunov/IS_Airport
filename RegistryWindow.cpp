@@ -1,5 +1,5 @@
 #include "RegistryWindow.h"
-#include "ui_registrywindow.h"
+#include "ui_RegistryWindow.h"
 
 #include <QMessageBox>
 #include <QString>

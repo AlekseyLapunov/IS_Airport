@@ -1,5 +1,5 @@
 #include "AuthWindow.h"
-#include "ui_authwindow.h"
+#include "ui_AuthWindow.h"
 #include <QRegularExpression>
 #include "RegistryWindow.h"
 
@@ -39,7 +39,7 @@ void AuthWindow::giveDBManagerPtr(DataBases *DBPointer)
 
 bool AuthWindow::checkFields()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
@@ -62,6 +62,42 @@ bool AuthWindow::checkFields()
     return true;
 }
 
+void AuthWindow::creatingRoot()
+{
+    if(DBManagerPtr->loginFound("root"))
+    {
+        QMessageBox mBox(this);
+        mBox.setWindowTitle(tr("Ошибка"));
+        mBox.setIcon(QMessageBox::Critical);
+        mBox.setText(tr("Корневой администратор уже создан"));
+        mBox.exec();
+        doRootReboot();
+    }
+    else
+    {
+     DBManagerPtr->createAdmin("root", "standart#");
+     AuthWindow::adminCreatedBox();
+    }
+}
+
+void AuthWindow::doRootReboot()
+{
+    QMessageBox answerBox(this);
+    answerBox.setIcon(QMessageBox::Question);
+    answerBox.setWindowTitle("Вопрос");
+    answerBox.setText(tr("Желаете выполнить сброс параметров<br>"
+                         "для входа корневого администратора?"));
+    answerBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    answerBox.setDefaultButton(QMessageBox::Yes);
+    if(answerBox.exec() == QMessageBox::Yes)
+    {
+        User temp;
+        DBManagerPtr->find("root", temp);
+        if(DBManagerPtr->changeUserInfo(temp.getID(), "root", "standart#", User::idAdministrator))
+            rootRebootBox();
+    }
+}
+
 void AuthWindow::accept()
 {
     *authWindowClosed = false;
@@ -70,19 +106,7 @@ void AuthWindow::accept()
     {
         if(getLoginString() == "admintools" && getPasswordString() == "30112020")
         {
-           if(DBManagerPtr->loginFound("root"))
-           {
-               QMessageBox mBox;
-               mBox.setWindowTitle(tr("Ошибка"));
-               mBox.setIcon(QMessageBox::Critical);
-               mBox.setText(tr("Корневой администратор уже создан"));
-               mBox.exec();
-           }
-           else
-           {
-            DBManagerPtr->createAdmin("root", "standart#");
-            AuthWindow::adminCreatedBox();
-           }
+           creatingRoot();
         }
         else
         if(DBManagerPtr->find(getLoginString().toStdString(), getPasswordString().toStdString(), *userPtr))
@@ -92,7 +116,7 @@ void AuthWindow::accept()
         }
         else
         {
-            QMessageBox warning;
+            QMessageBox warning(this);
             warning.setWindowTitle("Ошибка");
             warning.setText("Не удалось найти пользователя с такой<br> комбинацией логина и пароля");
             warning.setIcon(QMessageBox::Critical);
@@ -104,10 +128,19 @@ void AuthWindow::accept()
 
 void AuthWindow::adminCreatedBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
-    mBox.setText(tr("Корневой администратор был создан: root, standart_#"));
+    mBox.setText(tr("Корневой администратор был создан: root, standart#"));
+    mBox.exec();
+}
+
+void AuthWindow::rootRebootBox()
+{
+    QMessageBox mBox(this);
+    mBox.setWindowTitle(tr("Успех"));
+    mBox.setIcon(QMessageBox::Information);
+    mBox.setText(tr("Параметры входа корневого администратора<br> были сброшены: root, standart#"));
     mBox.exec();
 }
 

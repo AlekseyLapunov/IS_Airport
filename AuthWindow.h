@@ -36,7 +36,11 @@ private:
     // Проверяет поля ввода на правильность
     bool checkFields();
 
+    void creatingRoot();
+    void doRootReboot();
+
     void adminCreatedBox();
+    void rootRebootBox();
 
     DataBases *DBManagerPtr;
     User *userPtr;

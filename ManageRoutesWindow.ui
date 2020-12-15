@@ -23,7 +23,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Управление рейсами</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/new/prefix1/icons1/samolet.jpg</normaloff>:/new/prefix1/icons1/samolet.jpg</iconset>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -148,7 +152,9 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>closeButton</sender>

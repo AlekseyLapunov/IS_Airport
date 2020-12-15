@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include "ui_mainwindow.h"
+#include "ui_MainWindow.h"
 #include "QApplication"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -133,6 +133,20 @@ void MainWindow::quit()
     }
 }
 
+void MainWindow::tellAbout()
+{
+    QMessageBox aboutDlg(this);
+    aboutDlg.setTextFormat(Qt::RichText);
+    aboutDlg.setWindowTitle(tr("О ИС Аэропорт"));
+    aboutDlg.setIcon(QMessageBox::Information);
+    aboutDlg.setText(tr("<br>"
+            "Информационная система \"Аэропорт\" является учебной программой,<br> разработанной"
+            " студентом группы КИ19-08б (направление 09.03.01) с целью выполнения поставленной"
+            " задачи в рамках учебного процесса.<br>""Автор (студент): Лапунов Алексей Юрьевич.<br>"
+                        "Преподаватель: Васильев Владимир Сергеевич."));
+    aboutDlg.exec();
+}
+
 void MainWindow::manageRoutes()
 {
     if(this->currentUser.getType() == User::idAdministrator
@@ -168,31 +182,6 @@ void MainWindow::manageWidgets()
         ui->manageRoutesButton->setHidden(true);
         ui->viewRequestsButton->setHidden(true);
     }
-}
-
-void MainWindow::showCurrent()
-{
-    QMessageBox mBox;
-    mBox.setWindowTitle("This user info");
-    QString login = QString::fromStdString(currentUser.getLogin());
-    QString password = QString::fromStdString(currentUser.getPassword());
-    int ID = currentUser.getID();
-    QString typeName = currentUser.getTypeString();
-    mBox.setText(tr("Login: %1 <br>"
-                    "Password: %2 <br>"
-                    "ID: %3 <br>"
-                    "Type: %4").arg(login).arg(password).arg(ID).arg(typeName));
-    mBox.exec();
-
-    QMessageBox mBox2;
-    mBox2.setWindowTitle("This pass info");
-    QString fullName = currentPass.getFullName();
-    QString passport = currentPass.getPassport();
-    int ID2 = currentPass.getID();
-    mBox2.setText(tr("Full Name: %1 <br>"
-                    "Passport: %2 <br>"
-                    "ID: %3").arg(fullName).arg(passport).arg(ID2));
-    mBox2.exec();
 }
 
 

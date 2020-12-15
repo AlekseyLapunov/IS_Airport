@@ -28,6 +28,7 @@ public:
     bool find(int ID, QString dep, QString des,
               QString mark, int seats, Route &ptr);
     bool find(int ID, Route &ptr);
+    bool find(string login, User &ptr);
 
     bool loginFound(string login);
     bool passFound(QString passInfo);
@@ -53,6 +54,8 @@ public:
 
     void setPassData(int userID, Passenger &pass);
 private:
+
+    static void createHintFile();
 
     QList<User> *pUserList;
     QList<Passenger> *pPassList;

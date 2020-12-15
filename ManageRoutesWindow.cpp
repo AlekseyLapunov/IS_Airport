@@ -1,5 +1,5 @@
 #include "ManageRoutesWindow.h"
-#include "ui_managerouteswindow.h"
+#include "ui_ManageRoutesWindow.h"
 
 #include <QRegularExpression>
 #include <QDialog>
@@ -89,7 +89,7 @@ void ManageRoutesWindow::setShowMode(bool flag)
 
 void ManageRoutesWindow::gracBox(int flag)
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Поздравляем!"));
     mBox.setIcon(QMessageBox::Information);
     if(flag == creating) mBox.setText(tr("Маршрут успешно создан."));
@@ -99,7 +99,7 @@ void ManageRoutesWindow::gracBox(int flag)
 
 void ManageRoutesWindow::existensBox(int flag)
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     if(flag == creating) mBox.setText(tr("Маршрут с таким ID уже создан"));
@@ -109,7 +109,7 @@ void ManageRoutesWindow::existensBox(int flag)
 
 void ManageRoutesWindow::warnBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
@@ -118,7 +118,7 @@ void ManageRoutesWindow::warnBox()
 
 void ManageRoutesWindow::critBox()
 {
-    QMessageBox mBox;
+    QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Ошибка"));
     mBox.setIcon(QMessageBox::Critical);
     mBox.setText(tr("Удаление маршрута не удалось"));
