@@ -9,65 +9,65 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    authwindow.cpp \
-    databases.cpp \
-    editpasswindow.cpp \
-    edituserwindow.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    managerouteswindow.cpp \
-    myinfowindow.cpp \
-    passenger.cpp \
-    passengersbase.cpp \
-    passesviewwindow.cpp \
-    registrywindow.cpp \
-    route.cpp \
-    routesbase.cpp \
-    routesviewwindow.cpp \
-    ticket.cpp \
-    ticketrequestwindow.cpp \
-    ticketsbase.cpp \
-    ticketsviewwindow.cpp \
-    user.cpp \
-    usersbase.cpp \
-    usersviewwindow.cpp
+    AuthWindow.cpp \
+    DataBases.cpp \
+    EditPassWindow.cpp \
+    EditUserWindow.cpp \
+    MainWindow.cpp \
+    ManageRoutesWindow.cpp \
+    MyInfoWindow.cpp \
+    Passenger.cpp \
+    PassengersBase.cpp \
+    PassesViewWindow.cpp \
+    RegistryWindow.cpp \
+    Route.cpp \
+    RoutesBase.cpp \
+    RoutesViewWindow.cpp \
+    Ticket.cpp \
+    TicketRequestWindow.cpp \
+    TicketsBase.cpp \
+    TicketsViewWindow.cpp \
+    User.cpp \
+    UsersBase.cpp \
+    UsersViewWindow.cpp \
+    main.cpp
 
 HEADERS += \
-    authwindow.h \
-    databases.h \
-    editpasswindow.h \
-    edituserwindow.h \
-    mainwindow.h \
-    managerouteswindow.h \
-    myinfowindow.h \
-    passenger.h \
-    passengersbase.h \
-    passesviewwindow.h \
-    registrywindow.h \
-    route.h \
-    routesbase.h \
-    routesviewwindow.h \
-    ticket.h \
-    ticketrequestwindow.h \
-    ticketsbase.h \
-    ticketsviewwindow.h \
-    user.h \
-    usersbase.h \
-    usersviewwindow.h
+    AuthWindow.h \
+    DataBases.h \
+    EditPassWindow.h \
+    EditUserWindow.h \
+    MainWindow.h \
+    ManageRoutesWindow.h \
+    MyInfoWindow.h \
+    Passenger.h \
+    PassengersBase.h \
+    PassesViewWindow.h \
+    RegistryWindow.h \
+    Route.h \
+    RoutesBase.h \
+    RoutesViewWindow.h \
+    Ticket.h \
+    TicketRequestWindow.h \
+    TicketsBase.h \
+    TicketsViewWindow.h \
+    User.h \
+    UsersBase.h \
+    UsersViewWindow.h
 
 FORMS += \
-    authwindow.ui \
-    editpasswindow.ui \
-    edituserwindow.ui \
-    mainwindow.ui \
-    managerouteswindow.ui \
-    myinfowindow.ui \
-    passesviewwindow.ui \
-    registrywindow.ui \
-    routesviewwindow.ui \
-    ticketrequestwindow.ui \
-    ticketsviewwindow.ui \
-    usersviewwindow.ui
+    AuthWindow.ui \
+    EditPassWindow.ui \
+    EditUserWindow.ui \
+    MainWindow.ui \
+    ManageRoutesWindow.ui \
+    MyInfoWindow.ui \
+    PassesViewWindow.ui \
+    RegistryWindow.ui \
+    RoutesViewWindow.ui \
+    TicketRequestWindow.ui \
+    TicketsViewWindow.ui \
+    UsersViewWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
