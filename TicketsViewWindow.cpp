@@ -84,6 +84,8 @@ void TicketsViewWindow::answerToReq(QModelIndex index)
     {
         if(DBManagerPtr->changeTicket(routeID, passID, statusInt))
         {
+            if(status == "Покупка" || status == "Возвращён") DBManagerPtr->changeRouteSeats(routeID, -1);
+            else if (status == "Возврат" || status == "Куплен") DBManagerPtr->changeRouteSeats(routeID, 1);
             fillTable();
             gracBox();
         }

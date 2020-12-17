@@ -44,7 +44,10 @@ void EditPassWindow::accept()
             QDialog::accept();
         }
         else
-        QMessageBox warnBox(QMessageBox::Warning, "Внимание", "Пассажир с такими данными паспорта уже существует");
+        {
+            QMessageBox warnBox(QMessageBox::Warning, "Внимание", "Пассажир с такими данными паспорта уже существует");
+            warnBox.exec();
+        }
     }
 }
 

@@ -24,9 +24,10 @@ private slots:
 
 private:
     enum {push, change};
-    enum {ret, req};
+    enum {ret, req, del};
     void ticketToBuy(int);
     void ticketToReturn();
+    void ticketToDelete();
 
     void warnBox();
     void gracBox(int);

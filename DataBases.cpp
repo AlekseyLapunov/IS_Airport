@@ -188,6 +188,23 @@ void DataBases::pushRoute(int ID, QString dep, QString des, QString mark, int se
     RoutesBase::refreshBase(*pRoutesList);
 }
 
+void DataBases::changeRouteSeats(int routeID, int nSeats)
+{
+    for(int i = 0; i < (int)pRoutesList->size(); i++)
+    {
+        Route temp = pRoutesList->at(i);
+        if(temp.getID() == routeID)
+        {
+            int setSeats = temp.getSeats() + nSeats;
+            Route changeBy(routeID, temp.getDepart(), temp.getDest(), temp.getMark(), setSeats);
+            pRoutesList->removeAt(i);
+            pRoutesList->insert(i, changeBy);
+            RoutesBase::refreshBase(*pRoutesList);
+            return;
+        }
+    }
+}
+
 bool DataBases::deleteRoute(int rID)
 {
     RoutesBase::loadBase(*pRoutesList);
@@ -199,6 +216,21 @@ bool DataBases::deleteRoute(int rID)
         {
             pRoutesList->removeAt(i);
             RoutesBase::refreshBase(*pRoutesList);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DataBases::deleteTicket(int fRouteID, int fPassID)
+{
+    for(int i = 0; i < (int)pTicketsList->size(); i++)
+    {
+        Ticket temp = pTicketsList->at(i);
+        if(temp.getRouteID() == fRouteID && temp.getPassID() == fPassID)
+        {
+            pTicketsList->removeAt(i);
+            TicketsBase::refreshBase(*pTicketsList);
             return true;
         }
     }

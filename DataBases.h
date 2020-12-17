@@ -42,8 +42,9 @@ public:
     void pushTicket(int routeID, int passID, int status);
     void pushRoute(int ID, QString dep, QString des,
                    QString mark, int seats);
-
+    void changeRouteSeats(int routeID, int nSeats);
     bool deleteRoute(int rID);
+    bool deleteTicket(int routeID, int passID);
     void destroyPassAndTickets(int pID);
     void loadAllBase();
 

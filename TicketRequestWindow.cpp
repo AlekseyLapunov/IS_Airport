@@ -29,15 +29,18 @@ void TicketRequestWindow::doRequest()
 {
     if(DBManagePtr->find(ui->routeIDEdit->value(), route))
     {
-        if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq, ticket) ||
-           DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReqAns, ticket))
+        if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReqAns, ticket))
         {
             this->ticketToReturn();
         }
-        else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet, ticket)
-                || DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRetAns, ticket))
+        else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRetAns, ticket))
         {
             this->ticketToBuy(change);
+        }
+        else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet, ticket)
+                || DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq, ticket))
+        {
+            this->ticketToDelete();
         }
         else this->ticketToBuy(push);
     }
@@ -59,6 +62,17 @@ void TicketRequestWindow::ticketToReturn()
     gracBox(ret);
 }
 
+void TicketRequestWindow::ticketToDelete()
+{
+    if(DBManagePtr->deleteTicket(ui->routeIDEdit->value(), curUserPtr->getID()))
+    gracBox(del);
+    else
+    {
+        QMessageBox crit(QMessageBox::Critical, "Ошибка", "Произошла непредвиденная ошибка");
+        crit.exec();
+    }
+}
+
 void TicketRequestWindow::warnBox()
 {
     QMessageBox mBox(this);
@@ -75,6 +89,7 @@ void TicketRequestWindow::gracBox(int flag)
     mBox.setIcon(QMessageBox::Information);
     if(flag == req) mBox.setText(tr("Запрос билета со статусом \"Покупка\" создан"));
     if(flag == ret) mBox.setText(tr("Запрос билета со статусом \"Возврат\" создан"));
+    if(flag == del) mBox.setText(tr("Запрос билета удалён"));
     mBox.exec();
 }
 
