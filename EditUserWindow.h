@@ -28,7 +28,9 @@ private slots:
 
 private:
     bool checkFields();
-
+    bool passToOther();
+    bool otherToPass();
+    bool doesUserChange();
     bool *userChanged;
     DataBases *DBManagerPtr;
     User *userPtr;

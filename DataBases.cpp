@@ -151,11 +151,14 @@ void DataBases::pushUser(string sLogin, string sPassword)
     UsersBase::refreshBase(*pUserList);
 }
 
-void DataBases::pushPassenger(QString sFullName, QString sPassportInfo)
+void DataBases::pushPassenger(QString sFullName, QString sPassportInfo,
+                              bool ifDefault, int uID)
 {
     PassengersBase::loadBase(*pPassList);
 
-    int sID = pUserList->size();
+    int sID = -1;
+    if(ifDefault) sID = pUserList->size();
+    else sID = uID;
 
     sFullName = Passenger::fixFullName(sFullName);
 
@@ -200,6 +203,31 @@ bool DataBases::deleteRoute(int rID)
         }
     }
     return false;
+}
+
+void DataBases::destroyPassAndTickets(int pID)
+{
+    PassengersBase::loadBase(*pPassList);
+    for(int i = 0; i < (int)pPassList->size(); i++)
+    {
+        Passenger temp = pPassList->at(i);
+        if(temp.getID() == pID)
+        {
+            pPassList->removeAt(i);
+            PassengersBase::refreshBase(*pPassList);
+            break;
+        }
+    }
+    TicketsBase::loadBase(*pTicketsList);
+    for(int i = (int)pTicketsList->size() - 1; i >= 0; i--)
+    {
+        Ticket temp = pTicketsList->at(i);
+        if(temp.getPassID() == pID)
+        {
+            pTicketsList->removeAt(i);
+        }
+    }
+    TicketsBase::refreshBase(*pTicketsList);
 }
 
 void DataBases::loadAllBase()

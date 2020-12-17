@@ -38,13 +38,13 @@ public:
 
     void createAdmin(string sLogin, string sPassword);
     void pushUser(string sLogin, string sPassword);
-    void pushPassenger(QString fullName, QString passInfo);
+    void pushPassenger(QString fullName, QString passInfo, bool ifDefault = true, int uID = -1);
     void pushTicket(int routeID, int passID, int status);
     void pushRoute(int ID, QString dep, QString des,
                    QString mark, int seats);
 
     bool deleteRoute(int rID);
-
+    void destroyPassAndTickets(int pID);
     void loadAllBase();
 
     bool changeTicket(int cRouteID, int cPassID, int cStatus);

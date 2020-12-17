@@ -34,11 +34,17 @@ void EditPassWindow::accept()
 {
     if(checkFields())
     {
-        *passChanged = true;
-        Passenger transmitter(ui->fullNameEdit->text(), ui->passportEdit->text().toStdString(),
+        if(!DBManagerPtr->passFound(ui->passportEdit->text())
+           || passPtr->getPassport() == ui->passportEdit->text())
+        {
+            *passChanged = true;
+            Passenger transmitter(ui->fullNameEdit->text(), ui->passportEdit->text().toStdString(),
                      passPtr->getID());
-        *passPtr = transmitter;
-        QDialog::accept();
+            *passPtr = transmitter;
+            QDialog::accept();
+        }
+        else
+        QMessageBox warnBox(QMessageBox::Warning, "Внимание", "Пассажир с такими данными паспорта уже существует");
     }
 }
 
