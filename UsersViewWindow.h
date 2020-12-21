@@ -26,6 +26,7 @@ public:
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<User> *sUserListPtr);
     void fillTable(bool def = 1);
+    void giveCurUserPtr(User *);
 
 private slots:
     void editUser(QModelIndex);
@@ -40,6 +41,7 @@ private:
     void refreshListPtr();
 
     User userFound;
+    User *curUserPtr;
     bool userChanged;
 
     EditUserWindow editUserWindow;

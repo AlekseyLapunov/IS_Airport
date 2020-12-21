@@ -18,6 +18,7 @@ public:
     ~EditUserWindow();
 
     void giveUserPtr(User*);
+    void giveCurUserPtr(User*);
     void giveDBManagerPtr(DataBases*);
     void giveBoolPtr(bool *boolPtr);
     void setFields();
@@ -27,6 +28,7 @@ private slots:
     void accept() override;
 
 private:
+    void checkWarn();
     bool checkFields();
     bool passToOther();
     bool otherToPass();
@@ -34,6 +36,7 @@ private:
     bool *userChanged;
     DataBases *DBManagerPtr;
     User *userPtr;
+    User *curUserPtr;
     Ui::EditUserWindow *ui;
 };
 

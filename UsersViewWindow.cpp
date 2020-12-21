@@ -52,6 +52,11 @@ void UsersViewWindow::fillTable(bool def)
     }
 }
 
+void UsersViewWindow::giveCurUserPtr(User *curUser)
+{
+    curUserPtr = curUser;
+}
+
 void UsersViewWindow::editUser(QModelIndex index)
 {
     int curRowNumber = index.row();
@@ -62,6 +67,7 @@ void UsersViewWindow::editUser(QModelIndex index)
     QString login = table->data(temp).toString();
     DBManagerPtr->find(ID, login.toStdString(), userFound);
     editUserWindow.giveUserPtr(&userFound);
+    editUserWindow.giveCurUserPtr(curUserPtr);
     editUserWindow.giveDBManagerPtr(DBManagerPtr);
     editUserWindow.giveBoolPtr(&userChanged);
     editUserWindow.setFields();

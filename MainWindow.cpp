@@ -56,6 +56,7 @@ void MainWindow::viewUsers()
         UsersViewWindow usersWindow;
         usersWindow.giveDBManagerPtr(&DBManager);
         usersWindow.giveListPtr(&UsersList);
+        usersWindow.giveCurUserPtr(&currentUser);
         usersWindow.fillTable();
         usersWindow.exec();
     }
