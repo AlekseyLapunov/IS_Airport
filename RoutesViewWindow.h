@@ -20,7 +20,10 @@ public:
 
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<Route> *sRouteListPtr);
-    void fillTable();
+    void fillTable(bool def = true);
+
+private slots:
+    void startFilter();
 
 private:
     DataBases *DBManagerPtr;

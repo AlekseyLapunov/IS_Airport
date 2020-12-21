@@ -1,5 +1,6 @@
 #include "RoutesViewWindow.h"
 #include "ui_RoutesViewWindow.h"
+#include <QMessageBox>
 
 RoutesViewWindow::RoutesViewWindow(QWidget *parent) :
     QDialog(parent),
@@ -33,9 +34,9 @@ void RoutesViewWindow::refreshListPtr()
     routesToShow = *routesListPtr;
 }
 
-void RoutesViewWindow::fillTable()
+void RoutesViewWindow::fillTable(bool def)
 {
-    refreshListPtr();
+    if(def) refreshListPtr();
     table->setColumnCount(5);
     table->setRowCount(routesToShow.size());
     QModelIndex index;
@@ -55,4 +56,17 @@ void RoutesViewWindow::fillTable()
         index = table->index(row, 4);
         table->setData(index, routesToShow[row].getSeats());
     }
+}
+
+void RoutesViewWindow::startFilter()
+{
+    routesToShow.clear();
+    for(int i = 0; i < (int) routesListPtr->size(); i++)
+    {
+        Route temp = routesListPtr->at(i);
+        QString dep = ui->depFilter->text(); QString des = ui->desFilter->text();
+        if(temp.getDepart().count(dep) != 0 && temp.getDest().count(des) != 0)
+            routesToShow.push_back(temp);
+    }
+    fillTable(0);
 }
