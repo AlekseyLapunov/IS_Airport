@@ -169,6 +169,6 @@ bool EditUserWindow::doesUserChange()
 {
     if(ui->loginEdit->text() == QString::fromStdString(userPtr->getLogin())
        && ui->passwordEdit->text() == QString::fromStdString(userPtr->getPassword())
-       && ui->typeEdit->currentIndex() == userPtr->getID()) return false;
+       && ui->typeEdit->currentIndex() == userPtr->getType()) return false;
     else return true;
 }

@@ -20,7 +20,6 @@ public:
     QString getDest();
     QString getMark();
     int getSeats();
-    void decremSeats();
 };
 
 #endif // ROUTE_H

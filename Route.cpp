@@ -42,9 +42,4 @@ int Route::getSeats()
     return seats;
 }
 
-void Route::decremSeats()
-{
-    if(seats - 1 > 0) seats--;
-}
-
 
