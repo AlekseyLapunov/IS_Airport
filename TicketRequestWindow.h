@@ -29,6 +29,7 @@ private:
     void ticketToReturn();
     void ticketToDelete();
 
+    void warnBoxSeats();
     void warnBox();
     void gracBox(int);
 

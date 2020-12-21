@@ -29,20 +29,23 @@ void TicketRequestWindow::doRequest()
 {
     if(DBManagePtr->find(ui->routeIDEdit->value(), route))
     {
-        if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReqAns, ticket))
+        if(route.getSeats() > 0)
         {
-            this->ticketToReturn();
-        }
-        else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRetAns, ticket))
-        {
-            this->ticketToBuy(change);
-        }
-        else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet, ticket)
-                || DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq, ticket))
-        {
-            this->ticketToDelete();
-        }
-        else this->ticketToBuy(push);
+            if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReqAns, ticket))
+            {
+                this->ticketToReturn();
+            }
+            else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRetAns, ticket))
+            {
+                this->ticketToBuy(change);
+            }
+            else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet, ticket)
+                    || DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq, ticket))
+            {
+                this->ticketToDelete();
+            }
+            else this->ticketToBuy(push);
+        } else warnBoxSeats();
     }
     else warnBox();
 }
@@ -79,6 +82,15 @@ void TicketRequestWindow::warnBox()
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Такого маршрута не существует"));
+    mBox.exec();
+}
+
+void TicketRequestWindow::warnBoxSeats()
+{
+    QMessageBox mBox(this);
+    mBox.setWindowTitle(tr("Внимание"));
+    mBox.setIcon(QMessageBox::Warning);
+    mBox.setText(tr("К сожалению, свободных мест нет"));
     mBox.exec();
 }
 

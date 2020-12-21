@@ -93,6 +93,7 @@ void AuthWindow::doRootReboot()
     {
         User temp;
         DBManagerPtr->find("root", temp);
+        if(temp.getType() == User::idPassenger) DBManagerPtr->destroyPassAndTickets(temp.getID());
         if(DBManagerPtr->changeUserInfo(temp.getID(), "root", "standart#", User::idAdministrator))
             rootRebootBox();
     }
