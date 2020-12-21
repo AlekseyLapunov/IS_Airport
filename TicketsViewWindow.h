@@ -19,10 +19,11 @@ public:
 
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<Ticket> *sTicketListPtr);
-    void fillTable();
+    void fillTable(bool def = 1);
 
 private slots:
     void answerToReq(QModelIndex);
+    void startFilter(QString);
 
 private:
     DataBases *DBManagerPtr;

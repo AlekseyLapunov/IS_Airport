@@ -33,9 +33,9 @@ void TicketsViewWindow::refreshListPtr()
     ticketsToShow = *ticketsListPtr;
 }
 
-void TicketsViewWindow::fillTable()
+void TicketsViewWindow::fillTable(bool def)
 {
-    refreshListPtr();
+    if(def) refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(ticketsToShow.size());
     QModelIndex index;
@@ -91,6 +91,18 @@ void TicketsViewWindow::answerToReq(QModelIndex index)
         }
         else critBox();
     }
+}
+
+void TicketsViewWindow::startFilter(QString statusFilter)
+{
+    ticketsToShow.clear();
+    for(int i = 0; i < (int) ticketsListPtr->size(); i++)
+    {
+        Ticket temp = ticketsListPtr->at(i);
+        if(temp.getStatusStr() == statusFilter || statusFilter == "Выберите...")
+            ticketsToShow.push_back(temp);
+    }
+    fillTable(0);
 }
 
 void TicketsViewWindow::gracBox()
