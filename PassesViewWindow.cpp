@@ -32,9 +32,9 @@ void PassesViewWindow::refreshListPtr()
     passesToShow = *passesListPtr;
 }
 
-void PassesViewWindow::fillTable()
+void PassesViewWindow::fillTable(bool def)
 {
-    refreshListPtr();
+    if(def) refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(passesToShow.size());
     QModelIndex index;
@@ -70,4 +70,17 @@ void PassesViewWindow::editPass(QModelIndex index)
         DBManagerPtr->changePassInfo(ID, sFullName, sPassport);
         fillTable();
     }
+}
+
+void PassesViewWindow::startFilter()
+{
+    passesToShow.clear();
+    for(int i = 0; i < (int) passesListPtr->size(); i++)
+    {
+        Passenger temp = passesListPtr->at(i);
+        QString fullName = ui->fullNameFilter->text();
+        if(temp.getFullName().count(fullName) != 0)
+            passesToShow.push_back(temp);
+    }
+    fillTable(0);
 }
