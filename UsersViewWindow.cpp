@@ -33,9 +33,9 @@ void UsersViewWindow::refreshListPtr()
     usersToShow = *userListPtr;
 }
 
-void UsersViewWindow::fillTable()
+void UsersViewWindow::fillTable(bool def)
 {
-    refreshListPtr();
+    if(def) refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(usersToShow.size());
     QModelIndex index;
@@ -73,6 +73,18 @@ void UsersViewWindow::editUser(QModelIndex index)
         DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType);
         fillTable();
     }
+}
+
+void UsersViewWindow::startFilter(QString typeFilter)
+{
+    usersToShow.clear();
+    for(int i = 0; i < (int) userListPtr->size(); i++)
+    {
+        User temp = userListPtr->at(i);
+        if(temp.getTypeStringRus() == typeFilter || typeFilter == "Выберите...")
+            usersToShow.push_back(temp);
+    }
+    fillTable(0);
 }
 
 

@@ -27,6 +27,8 @@ public:
     int getType();
     // Функция возвращает тип пользователя (в формате QString)
     QString getTypeString();
+    // Функция возвращает тип пользователя (в формате QString)
+    QString getTypeStringRus();
     // Функция возвращает логин
     string getLogin();
     // Функция возвращает пароль

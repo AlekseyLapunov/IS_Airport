@@ -37,6 +37,14 @@ QString User::getTypeString()
     return "Undefined";
 }
 
+QString User::getTypeStringRus()
+{
+    if(this->type == idPassenger) return "Пассажир";
+    if(this->type == idCashier) return "Кассир";
+    if(this->type == idAdministrator) return "Администратор";
+    return "Неизв.";
+}
+
 string User::getLogin()
 {
     return this->login;

@@ -25,10 +25,11 @@ public:
 
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<User> *sUserListPtr);
-    void fillTable();
+    void fillTable(bool def = 1);
 
 private slots:
     void editUser(QModelIndex);
+    void startFilter(QString);
 
 private:
     DataBases *DBManagerPtr;
