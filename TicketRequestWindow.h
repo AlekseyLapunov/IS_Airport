@@ -15,7 +15,6 @@ class TicketRequestWindow : public QDialog
 public:
     explicit TicketRequestWindow(QWidget *parent = nullptr);
     ~TicketRequestWindow();
-
     void giveDBManagePtr(DataBases *DBPtr);
     void giveUserPtr(User *userPtr);
 
@@ -28,17 +27,13 @@ private:
     void ticketToBuy(int);
     void ticketToReturn();
     void ticketToDelete();
-
     void warnBoxSeats();
     void warnBox();
     void gracBox(int);
-
     DataBases *DBManagePtr;
-
     User *curUserPtr;
     Ticket ticket;
     Route route;
-
     Ui::TicketRequestWindow *ui;
 };
 

@@ -7,31 +7,25 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     MainWindow::setNulls();
     MainWindow::giveAllPtrs();
     DBManager.loadAllBase();
-
-    // Вызов окна авторизации
     authWindow.exec();
-   if(!authWindowClosed)
-   {
+   if (!authWindowClosed) {
        MainWindowClosed = false;
        MainWindow::manageWidgets();
        this->show();
-       if(currentUser.getType() == User::idPassenger)
+       if (currentUser.getType() == User::idPassenger)
        DBManager.setPassData(currentUser.getID(), currentPass);
    }
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     MainWindow::setNulls();
     delete ui;
 }
 
-void MainWindow::giveAllPtrs()
-{
+void MainWindow::giveAllPtrs() {
     DBManager.setListPointers(&UsersList, &PassesList,
                               &RoutesList, &TicketsList);
     authWindow.giveDBManagerPtr(&DBManager);
@@ -40,19 +34,15 @@ void MainWindow::giveAllPtrs()
     authWindow.givePassPtr(currentPass);
 }
 
-void MainWindow::setNulls()
-{
+void MainWindow::setNulls() {
     UsersList.clear();
     PassesList.clear();
     TicketsList.clear();
     RoutesList.clear();
 }
 
-void MainWindow::viewUsers()
-{
-    if(this->currentUser.getType() == User::idAdministrator)
-    {
-        // Окно просмотра пользователей
+void MainWindow::viewUsers() {
+    if (this->currentUser.getType() == User::idAdministrator) {
         UsersViewWindow usersWindow;
         usersWindow.giveDBManagerPtr(&DBManager);
         usersWindow.giveListPtr(&UsersList);
@@ -64,9 +54,7 @@ void MainWindow::viewUsers()
 
 void MainWindow::viewPasses()
 {
-    if(this->currentUser.getType() == User::idAdministrator)
-    {
-        // Окно просмотра пассажиров
+    if (this->currentUser.getType() == User::idAdministrator) {
         PassesViewWindow passesWindow;
         passesWindow.giveDBManagerPtr(&DBManager);
         passesWindow.giveListPtr(&PassesList);
@@ -77,9 +65,7 @@ void MainWindow::viewPasses()
 
 void MainWindow::viewMyInfo()
 {
-    if(this->currentUser.getType() == User::idPassenger)
-    {
-        // Окно просмотра пассажиров
+    if (this->currentUser.getType() == User::idPassenger) {
         MyInfoWindow myInfoWindow;
         myInfoWindow.giveTicketsListPtr(&TicketsList);
         myInfoWindow.givePassPtr(&currentPass);
@@ -88,9 +74,7 @@ void MainWindow::viewMyInfo()
     }
 }
 
-void MainWindow::viewRoutes()
-{
-    // Окно просмотра рейсов
+void MainWindow::viewRoutes() {
     RoutesViewWindow routesWindow;
     routesWindow.giveDBManagerPtr(&DBManager);
     routesWindow.giveListPtr(&RoutesList);
@@ -98,12 +82,9 @@ void MainWindow::viewRoutes()
     routesWindow.exec();
 }
 
-void MainWindow::viewTickets()
-{
-    if(currentUser.getType() == User::idAdministrator
-       || currentUser.getType() == User::idCashier)
-    {
-        // Окно просмотра рейсов
+void MainWindow::viewTickets() {
+    if (currentUser.getType() == User::idAdministrator
+       || currentUser.getType() == User::idCashier) {
         TicketsViewWindow ticketsWindow;
         ticketsWindow.giveDBManagerPtr(&DBManager);
         ticketsWindow.giveListPtr(&TicketsList);
@@ -112,30 +93,26 @@ void MainWindow::viewTickets()
     }
 }
 
-void MainWindow::doRequest()
-{
+void MainWindow::doRequest() {
     TicketRequestWindow tReqWindow;
     tReqWindow.giveDBManagePtr(&DBManager);
     tReqWindow.giveUserPtr(&currentUser);
     tReqWindow.exec();
 }
 
-void MainWindow::quit()
-{
+void MainWindow::quit() {
     QMessageBox quitBox(this);
     quitBox.setIcon(QMessageBox::Question);
     quitBox.setWindowTitle("Выход");
     quitBox.setText(tr("Вы уверены, что хотите<br> выйти из программы?"));
     quitBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
     quitBox.setDefaultButton(QMessageBox::Yes);
-    if(quitBox.exec() == QMessageBox::Yes)
-    {
+    if (quitBox.exec() == QMessageBox::Yes) {
         QApplication::quit();
     }
 }
 
-void MainWindow::tellAbout()
-{
+void MainWindow::tellAbout() {
     QMessageBox aboutDlg(this);
     aboutDlg.setTextFormat(Qt::RichText);
     aboutDlg.setWindowTitle(tr("О ИС Аэропорт"));
@@ -148,11 +125,9 @@ void MainWindow::tellAbout()
     aboutDlg.exec();
 }
 
-void MainWindow::manageRoutes()
-{
-    if(this->currentUser.getType() == User::idAdministrator
-            || this->currentUser.getType() == User::idCashier)
-    {
+void MainWindow::manageRoutes() {
+    if (this->currentUser.getType() == User::idAdministrator
+       || this->currentUser.getType() == User::idCashier) {
         // Окно Создания/Удаления рейсов
         ManageRoutesWindow *manageRoutesWindow = new ManageRoutesWindow();
         manageRoutesWindow->giveDBPtr(&DBManager);
@@ -160,23 +135,19 @@ void MainWindow::manageRoutes()
     }
 }
 
-void MainWindow::manageWidgets()
-{
+void MainWindow::manageWidgets() {
     setWindowTitle(tr("ИС Аэропорт"));
-    if(this->currentUser.getType() == User::idAdministrator)
-    {
+    if(this->currentUser.getType() == User::idAdministrator) {
         ui->myInfoButton->setHidden(true);
         ui->makeRequestButton->setHidden(true);
     }
-    else if (this->currentUser.getType() == User::idCashier)
-    {
+    else if (this->currentUser.getType() == User::idCashier) {
         ui->myInfoButton->setHidden(true);
         ui->makeRequestButton->setHidden(true);
         ui->viewUsersButton->setHidden(true);
         ui->viewPassesButton->setHidden(true);
     }
-    else if (this->currentUser.getType() == User::idPassenger)
-    {
+    else if (this->currentUser.getType() == User::idPassenger) {
         ui->label->setText(tr("Добро пожаловать, %1").arg(this->currentPass.getFullName()));
         ui->viewUsersButton->setHidden(true);
         ui->viewPassesButton->setHidden(true);

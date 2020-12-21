@@ -17,29 +17,23 @@ RegistryWindow::~RegistryWindow()
     delete ui;
 }
 
-void RegistryWindow::giveDBPtr(DataBases *DBPtr)
-{
+void RegistryWindow::giveDBPtr(DataBases *DBPtr) {
     DBManagePtr = DBPtr;
 }
 
-void RegistryWindow::beginRegistry()
-{
-    if(!checkFields())
-    {
+void RegistryWindow::beginRegistry() {
+    if (!checkFields()) {
         RegistryWindow::warnBox();
     }
-    else
-    {
-
+    else {
         string thisLogin = getLoginFF(), thisPassword = getPasswordFF();
         QString thisFullName = getFullNameFF(), thisPassInfo = getPassportFF();
         QString thisPassport = getPassportFF();
-        if(DBManagePtr->loginFound(thisLogin) || DBManagePtr->passFound(thisPassport))
-        {
+        if (DBManagePtr->loginFound(thisLogin)
+           || DBManagePtr->passFound(thisPassport)) {
             RegistryWindow::existensBox();
         }
-        else
-        {
+        else {
             DBManagePtr->pushUser(thisLogin, thisPassword);
             DBManagePtr->pushPassenger(thisFullName, thisPassInfo);
             QDialog::accept();
@@ -49,8 +43,7 @@ void RegistryWindow::beginRegistry()
     }
 }
 
-void RegistryWindow::gracBox()
-{
+void RegistryWindow::gracBox() {
     QMessageBox mBox;
     mBox.setWindowTitle(tr("Поздравляем!"));
     mBox.setIcon(QMessageBox::Information);
@@ -58,8 +51,7 @@ void RegistryWindow::gracBox()
     mBox.exec();
 }
 
-void RegistryWindow::warnBox()
-{
+void RegistryWindow::warnBox() {
     QMessageBox mBox;
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
@@ -67,8 +59,7 @@ void RegistryWindow::warnBox()
     mBox.exec();
 }
 
-void RegistryWindow::existensBox()
-{
+void RegistryWindow::existensBox() {
     QMessageBox mBox;
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
@@ -76,39 +67,39 @@ void RegistryWindow::existensBox()
     mBox.exec();
 }
 
-bool RegistryWindow::checkFields()
-{
-    if(anyEmpty()) return false;
-    if(checkLoginField() &&
-    checkPasswordField() &&
-    checkPasswords()     &&
-    checkFullNameField() &&
-    checkPassportField())
-    return true; else return false;
-}
-
-bool RegistryWindow::anyEmpty()
-{
-    if(getLoginFF().length() <= 0 ||
-       getPasswordFF().length() <= 0 ||
-       getPasswordACKFF().length() <= 0 ||
-       getFullNameFF().length() <=0 ||
-       getPassportFF().length() <= 0) return true;
+bool RegistryWindow::checkFields() {
+    if (anyEmpty())
+        return false;
+    if (checkLoginField()
+        && checkPasswordField()
+        && checkPasswords()
+        && checkFullNameField()
+        && checkPassportField())
+    return true;
     else return false;
 }
 
-bool RegistryWindow::checkLoginField()
-{
-    string login = getLoginFF();
-    if(login == "admintools" || login == "root") return false;
-    if(login.length() < 4 || login.length() > 12) return false;
+bool RegistryWindow::anyEmpty() {
+    if (getLoginFF().length() <= 0
+        || getPasswordFF().length() <= 0
+        || getPasswordACKFF().length() <= 0
+        || getFullNameFF().length() <=0
+        || getPassportFF().length() <= 0)
+        return true;
     else
-    {
-        // Посимвольная проверка
-        for(int i = 0; i < (int) login.length(); i++)
-        {
+        return false;
+}
+
+bool RegistryWindow::checkLoginField() {
+    string login = getLoginFF();
+    if (login == "admintools" || login == "root")
+        return false;
+    if (login.length() < 4 || login.length() > 12)
+        return false;
+    else {
+        for (int i = 0; i < (int) login.length(); i++) {
             int charToInt = login[i];
-            if((charToInt < 97 || charToInt > 122) &&
+            if ((charToInt < 97 || charToInt > 122) &&
                (charToInt < 48 || charToInt > 57))
                 return false;
         }
@@ -116,84 +107,76 @@ bool RegistryWindow::checkLoginField()
     }
 }
 
-bool RegistryWindow::checkPasswordField()
-{
+bool RegistryWindow::checkPasswordField() {
     string password = getPasswordFF();
-    if(password.length() < 4 || password.length() > 18) return false;
-    else
-    {
-        // Посимвольная проверка
-        for(int i = 0; i < (int) password.length(); i++)
-        {
+    if (password.length() < 4 || password.length() > 18)
+        return false;
+    else {
+        for (int i = 0; i < (int) password.length(); i++) {
             int charToInt = password[i];
-            if((charToInt < 65 || charToInt > 90)
-               && (charToInt < 97 || charToInt > 122)
-               && (charToInt < 48 || charToInt > 57)
-               && (charToInt < 35 || charToInt > 38)
-               && (charToInt != 42) && (charToInt != 32)
-               && (charToInt != 38))
+            if ((charToInt < 65 || charToInt > 90)
+                 && (charToInt < 97 || charToInt > 122)
+                 && (charToInt < 48 || charToInt > 57)
+                 && (charToInt < 35 || charToInt > 38)
+                 && (charToInt != 42)
+                 && (charToInt != 32)
+                 && (charToInt != 38))
                 return false;
         }
         return true;
     }
 }
 
-bool RegistryWindow::checkFullNameField()
-{
+bool RegistryWindow::checkFullNameField() {
     QString fullName = getFullNameFF();
-    if(fullName.size() < 6 || fullName.size() > 40) return false;
-    // Если ФИО содержит буквы кроме русских
-    if(fullName.contains(QRegularExpression("[^А-Я а-я]")))
-        {
+    if (fullName.size() < 6 || fullName.size() > 40)
+        return false;
+    if (fullName.contains(QRegularExpression("[^А-Я а-я]"))) {
             return false;
         }
-    if(fullName[0] == " ") return false;
-    if(fullName.count(" ") != 2) return false;
-    if(fullName.count("  ") != 0) return false;
+    if(fullName[0] == " ")
+        return false;
+    if(fullName.count(" ") != 2)
+        return false;
+    if(fullName.count("  ") != 0)
+        return false;
     return true;
 }
 
-bool RegistryWindow::checkPassportField()
-{
+bool RegistryWindow::checkPassportField() {
     QString passInfo = getPassportFF();
     int length = passInfo.length();
-    if(length != 11) return false;
-    // Если паспортная информация содержит что-то кроме цифр и пробела
-    if(passInfo.contains(QRegularExpression("[^0-9 ]")))
-        {
+    if (length != 11) return false;
+    if (passInfo.contains(QRegularExpression("[^0-9 ]"))) {
             return false;
         }
-    if(passInfo.count(" ") != 1) return false;
+    if(passInfo.count(" ") != 1)
+        return false;
     return true;
 }
 
-bool RegistryWindow::checkPasswords()
-{
+bool RegistryWindow::checkPasswords() {
     if(getPasswordFF() == getPasswordACKFF())
-    return true; else return false;
+    return true;
+    else return false;
 }
 
-string RegistryWindow::getLoginFF()
-{
+string RegistryWindow::getLoginFF() {
     return this->ui->loginField->text().toStdString();
 }
 
-string RegistryWindow::getPasswordFF()
-{
+string RegistryWindow::getPasswordFF() {
     return this->ui->passwordField->text().toStdString();
 }
 
-string RegistryWindow::getPasswordACKFF()
-{
+string RegistryWindow::getPasswordACKFF() {
     return this->ui->passwordField_2->text().toStdString();
 }
 
-QString RegistryWindow::getFullNameFF()
-{
+QString RegistryWindow::getFullNameFF() {
     return this->ui->fullNameField->text();
 }
 
-QString RegistryWindow::getPassportFF()
-{
+QString RegistryWindow::getPassportFF() {
     return this->ui->passportField->text();
 }

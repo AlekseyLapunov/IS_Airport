@@ -44,29 +44,16 @@ private slots:
     void tellAbout();
 
 private:
-    // Текущий пользователь
     User currentUser;
-    // Текущий пассажир
     Passenger currentPass;
-
-    // Список пользователей
     QList<User> UsersList;
-    // Список пассажиров
     QList<Passenger> PassesList;
-    // Список билетов
     QList<Ticket> TicketsList;
-    // Список рейсов
     QList<Route> RoutesList;
-
     void manageWidgets();
     void giveAllPtrs();
-
-    // Объект взаимодействия с базами данных
     DataBases DBManager;
-
-    // Окно авторизации
     AuthWindow authWindow;
-
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

@@ -19,32 +19,28 @@ RoutesViewWindow::~RoutesViewWindow()
     delete ui;
 }
 
-void RoutesViewWindow::giveDBManagerPtr(DataBases *DBPointer)
-{
+void RoutesViewWindow::giveDBManagerPtr(DataBases *DBPointer) {
     DBManagerPtr = DBPointer;
 }
 
-void RoutesViewWindow::giveListPtr(QList<Route> *sRouteListPtr)
-{
+void RoutesViewWindow::giveListPtr(QList<Route> *sRouteListPtr) {
     routesListPtr = sRouteListPtr;
 }
 
-void RoutesViewWindow::refreshListPtr()
-{
+void RoutesViewWindow::refreshListPtr() {
     routesToShow = *routesListPtr;
 }
 
-void RoutesViewWindow::fillTable(bool def)
-{
-    if(def) refreshListPtr();
+void RoutesViewWindow::fillTable(bool def) {
+    if (def)
+        refreshListPtr();
     table->setColumnCount(5);
     table->setRowCount(routesToShow.size());
     QModelIndex index;
     QStringList collsName = {"ID", "П. отправления", "П. назначения",
                              "Марка с.", "Кол-во св. мест"};
     table->setHorizontalHeaderLabels(collsName);
-    for(int row = 0; row < table->rowCount(); row++)
-    {
+    for (int row = 0; row < table->rowCount(); row++) {
         index = table->index(row, 0);
         table->setData(index, routesToShow[row].getID());
         index = table->index(row, 1);
@@ -58,14 +54,13 @@ void RoutesViewWindow::fillTable(bool def)
     }
 }
 
-void RoutesViewWindow::startFilter()
-{
+void RoutesViewWindow::startFilter() {
     routesToShow.clear();
-    for(int i = 0; i < (int) routesListPtr->size(); i++)
-    {
+    for (int i = 0; i < (int) routesListPtr->size(); i++) {
         Route temp = routesListPtr->at(i);
         QString dep = ui->depFilter->text(); QString des = ui->desFilter->text();
-        if(temp.getDepart().count(dep) != 0 && temp.getDest().count(des) != 0)
+        if (temp.getDepart().count(dep) != 0
+            && temp.getDest().count(des) != 0)
             routesToShow.push_back(temp);
     }
     fillTable(0);

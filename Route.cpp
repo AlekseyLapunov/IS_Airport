@@ -17,28 +17,23 @@ Route::Route(int sID, QString sDep, QString sDes,
     seats = sSeats;
 }
 
-int Route::getID()
-{
+int Route::getID() {
     return ID;
 }
 
-QString Route::getDepart()
-{
+QString Route::getDepart() {
     return departure;
 }
 
-QString Route::getDest()
-{
+QString Route::getDest() {
     return destination;
 }
 
-QString Route::getMark()
-{
+QString Route::getMark() {
     return mark;
 }
 
-int Route::getSeats()
-{
+int Route::getSeats() {
     return seats;
 }
 

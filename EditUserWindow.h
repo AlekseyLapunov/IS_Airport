@@ -16,7 +16,6 @@ class EditUserWindow : public QDialog
 public:
     explicit EditUserWindow(QWidget *parent = nullptr);
     ~EditUserWindow();
-
     void giveUserPtr(User*);
     void giveCurUserPtr(User*);
     void giveDBManagerPtr(DataBases*);
@@ -24,7 +23,6 @@ public:
     void setFields();
 
 private slots:
-
     void accept() override;
 
 private:

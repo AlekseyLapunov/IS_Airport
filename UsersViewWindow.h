@@ -22,7 +22,6 @@ class UsersViewWindow : public QDialog
 public:
     explicit UsersViewWindow(QWidget *parent = nullptr);
     ~UsersViewWindow();
-
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<User> *sUserListPtr);
     void fillTable(bool def = 1);
@@ -33,19 +32,14 @@ private slots:
     void startFilter(QString);
 
 private:
+    void refreshListPtr();
     DataBases *DBManagerPtr;
-
     QList<User> usersToShow;
     QList<User> *userListPtr;
-
-    void refreshListPtr();
-
     User userFound;
     User *curUserPtr;
     bool userChanged;
-
     EditUserWindow editUserWindow;
-
     Ui::UsersViewWindow *ui;
     QStandardItemModel *table;
 };

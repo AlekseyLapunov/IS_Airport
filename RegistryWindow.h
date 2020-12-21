@@ -18,7 +18,6 @@ class RegistryWindow : public QDialog
 public:
     explicit RegistryWindow(QWidget *parent = nullptr);
     ~RegistryWindow();
-
     void giveDBPtr(DataBases *DBPtr);
 
 private slots:
@@ -32,17 +31,14 @@ private:
     bool checkFullNameField();
     bool checkPassportField();
     bool anyEmpty();
-
     void gracBox();
     void warnBox();
     void existensBox();
-
     string getLoginFF();
     string getPasswordFF();
     string getPasswordACKFF();
     QString getFullNameFF();
     QString getPassportFF();
-
     DataBases *DBManagePtr;
     Ui::RegistryWindow *ui;
 };

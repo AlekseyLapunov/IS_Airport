@@ -17,7 +17,6 @@ class RoutesViewWindow : public QDialog
 public:
     explicit RoutesViewWindow(QWidget *parent = nullptr);
     ~RoutesViewWindow();
-
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<Route> *sRouteListPtr);
     void fillTable(bool def = true);
@@ -26,15 +25,11 @@ private slots:
     void startFilter();
 
 private:
+    void refreshListPtr();
     DataBases *DBManagerPtr;
-
     QList<Route> routesToShow;
     QList<Route> *routesListPtr;
-
-    void refreshListPtr();
-
     QStandardItemModel *table;
-
     Ui::RoutesViewWindow *ui;
 };
 

@@ -28,26 +28,18 @@ private slots:
     void registry();
 
 private:
-
-    // Возвращает строку логина из поля
     QString getLoginString();
-    // Возвращает строку пароля из поля
     QString getPasswordString();
-    // Проверяет поля ввода на правильность
     bool checkFields();
-
     void creatingRoot();
     void doRootReboot();
-
     void adminCreatedBox();
     void rootRebootBox();
-
     DataBases *DBManagerPtr;
     User *userPtr;
     Passenger *passPtr;
     bool *authWindowClosed;
     Ui::AuthWindow *ui;
-
 };
 
 #endif // AUTHWINDOW_H

@@ -26,18 +26,14 @@ private slots:
     void startFilter(QString);
 
 private:
-    DataBases *DBManagerPtr;
-
-    QList<Ticket> ticketsToShow;
-    QList<Ticket> *ticketsListPtr;
-
     void refreshListPtr();
     int defineStatus(QString ticketStatus);
     void gracBox();
     void critBox();
-
+    DataBases *DBManagerPtr;
+    QList<Ticket> ticketsToShow;
+    QList<Ticket> *ticketsListPtr;
     QStandardItemModel *table;
-
     Ui::TicketsViewWindow *ui;
 };
 

@@ -16,23 +16,19 @@ class EditPassWindow : public QDialog
 public:
     explicit EditPassWindow(QWidget *parent = nullptr);
     ~EditPassWindow();
-
     void givePassPtr(Passenger*);
     void giveDBManagerPtr(DataBases*);
     void giveBoolPtr(bool *boolPtr);
     void setFields();
 
 private slots:
-
     void accept() override;
 
 private:
     bool checkFields();
-
     bool *passChanged;
     DataBases *DBManagerPtr;
     Passenger *passPtr;
-
     Ui::EditPassWindow *ui;
 };
 

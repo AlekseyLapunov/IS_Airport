@@ -17,31 +17,27 @@ PassesViewWindow::~PassesViewWindow()
     delete ui;
 }
 
-void PassesViewWindow::giveDBManagerPtr(DataBases *DBPointer)
-{
+void PassesViewWindow::giveDBManagerPtr(DataBases *DBPointer) {
     DBManagerPtr = DBPointer;
 }
 
-void PassesViewWindow::giveListPtr(QList<Passenger> *sPassesListPtr)
-{
+void PassesViewWindow::giveListPtr(QList<Passenger> *sPassesListPtr) {
     passesListPtr = sPassesListPtr;
 }
 
-void PassesViewWindow::refreshListPtr()
-{
+void PassesViewWindow::refreshListPtr() {
     passesToShow = *passesListPtr;
 }
 
-void PassesViewWindow::fillTable(bool def)
-{
-    if(def) refreshListPtr();
+void PassesViewWindow::fillTable(bool def) {
+    if (def)
+        refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(passesToShow.size());
     QModelIndex index;
     QStringList collsName = {"ID", "ФИО", "Серия Номер"};
     table->setHorizontalHeaderLabels(collsName);
-    for(int row = 0; row < table->rowCount(); row++)
-    {
+    for (int row = 0; row < table->rowCount(); row++) {
         index = table->index(row, 0);
         table->setData(index, passesToShow[row].getID());
         index = table->index(row, 1);
@@ -51,8 +47,7 @@ void PassesViewWindow::fillTable(bool def)
     }
 }
 
-void PassesViewWindow::editPass(QModelIndex index)
-{
+void PassesViewWindow::editPass(QModelIndex index) {
     int curRowNumber = index.row();
     passChanged = false;
     QModelIndex temp = table->index(curRowNumber, 0);
@@ -63,8 +58,7 @@ void PassesViewWindow::editPass(QModelIndex index)
     editPassWindow.giveBoolPtr(&passChanged);
     editPassWindow.setFields();
     editPassWindow.exec();
-    if(passChanged)
-    {
+    if(passChanged) {
         QString sFullName = passFound.getFullName();
         string sPassport = passFound.getPassport().toStdString();
         DBManagerPtr->changePassInfo(ID, sFullName, sPassport);
@@ -72,14 +66,13 @@ void PassesViewWindow::editPass(QModelIndex index)
     }
 }
 
-void PassesViewWindow::startFilter()
-{
+void PassesViewWindow::startFilter() {
     passesToShow.clear();
-    for(int i = 0; i < (int) passesListPtr->size(); i++)
+    for (int i = 0; i < (int) passesListPtr->size(); i++)
     {
         Passenger temp = passesListPtr->at(i);
         QString fullName = ui->fullNameFilter->text();
-        if(temp.getFullName().count(fullName) != 0)
+        if (temp.getFullName().count(fullName) != 0)
             passesToShow.push_back(temp);
     }
     fillTable(0);

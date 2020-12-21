@@ -15,33 +15,29 @@ TicketRequestWindow::~TicketRequestWindow()
     delete ui;
 }
 
-void TicketRequestWindow::giveDBManagePtr(DataBases *DBPtr)
-{
+void TicketRequestWindow::giveDBManagePtr(DataBases *DBPtr) {
     DBManagePtr = DBPtr;
 }
 
-void TicketRequestWindow::giveUserPtr(User *userPtr)
-{
+void TicketRequestWindow::giveUserPtr(User *userPtr) {
     curUserPtr = userPtr;
 }
 
-void TicketRequestWindow::doRequest()
-{
-    if(DBManagePtr->find(ui->routeIDEdit->value(), route))
-    {
-        if(route.getSeats() > 0)
-        {
-            if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReqAns, ticket))
-            {
+void TicketRequestWindow::doRequest() {
+    if (DBManagePtr->find(ui->routeIDEdit->value(), route)) {
+        if (route.getSeats() > 0) {
+            if (DBManagePtr->find(ui->routeIDEdit->value(),
+                                 curUserPtr->getID(), Ticket::stReqAns, ticket)) {
                 this->ticketToReturn();
             }
-            else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRetAns, ticket))
-            {
+            else if (DBManagePtr->find(ui->routeIDEdit->value(),
+                                       curUserPtr->getID(), Ticket::stRetAns, ticket)) {
                 this->ticketToBuy(change);
             }
-            else if(DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet, ticket)
-                    || DBManagePtr->find(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq, ticket))
-            {
+            else if (DBManagePtr->find(ui->routeIDEdit->value(),
+                                      curUserPtr->getID(), Ticket::stRet, ticket)
+                     || DBManagePtr->find(ui->routeIDEdit->value(),
+                                         curUserPtr->getID(), Ticket::stReq, ticket)) {
                 this->ticketToDelete();
             }
             else this->ticketToBuy(push);
@@ -50,34 +46,29 @@ void TicketRequestWindow::doRequest()
     else warnBox();
 }
 
-void TicketRequestWindow::ticketToBuy(int flag)
-{
-    if(flag == push)
+void TicketRequestWindow::ticketToBuy(int flag) {
+    if (flag == push)
     DBManagePtr->pushTicket(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq);
     else
     DBManagePtr->changeTicket(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stReq);
     gracBox(req);
 }
 
-void TicketRequestWindow::ticketToReturn()
-{
+void TicketRequestWindow::ticketToReturn() {
     DBManagePtr->changeTicket(ui->routeIDEdit->value(), curUserPtr->getID(), Ticket::stRet);
     gracBox(ret);
 }
 
-void TicketRequestWindow::ticketToDelete()
-{
-    if(DBManagePtr->deleteTicket(ui->routeIDEdit->value(), curUserPtr->getID()))
+void TicketRequestWindow::ticketToDelete() {
+    if (DBManagePtr->deleteTicket(ui->routeIDEdit->value(), curUserPtr->getID()))
     gracBox(del);
-    else
-    {
+    else {
         QMessageBox crit(QMessageBox::Critical, "Ошибка", "Произошла непредвиденная ошибка");
         crit.exec();
     }
 }
 
-void TicketRequestWindow::warnBox()
-{
+void TicketRequestWindow::warnBox() {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
@@ -85,8 +76,7 @@ void TicketRequestWindow::warnBox()
     mBox.exec();
 }
 
-void TicketRequestWindow::warnBoxSeats()
-{
+void TicketRequestWindow::warnBoxSeats() {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
@@ -94,14 +84,16 @@ void TicketRequestWindow::warnBoxSeats()
     mBox.exec();
 }
 
-void TicketRequestWindow::gracBox(int flag)
-{
+void TicketRequestWindow::gracBox(int flag) {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
-    if(flag == req) mBox.setText(tr("Запрос билета со статусом \"Покупка\" создан"));
-    if(flag == ret) mBox.setText(tr("Запрос билета со статусом \"Возврат\" создан"));
-    if(flag == del) mBox.setText(tr("Запрос билета удалён"));
+    if (flag == req)
+        mBox.setText(tr("Запрос билета со статусом \"Покупка\" создан"));
+    if (flag == ret)
+        mBox.setText(tr("Запрос билета со статусом \"Возврат\" создан"));
+    if (flag == del)
+        mBox.setText(tr("Запрос билета удалён"));
     mBox.exec();
 }
 

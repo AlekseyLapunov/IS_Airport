@@ -12,50 +12,42 @@ AuthWindow::AuthWindow(QWidget *parent) :
     DataBases::checkForDir();
 }
 
-AuthWindow::~AuthWindow()
-{
+AuthWindow::~AuthWindow() {
     delete ui;
 }
 
-void AuthWindow::giveFlag(bool &flag)
-{
+void AuthWindow::giveFlag(bool &flag) {
     authWindowClosed = &flag;
 }
 
-void AuthWindow::giveUserPtr(User &user)
-{
+void AuthWindow::giveUserPtr(User &user) {
     userPtr = &user;
 }
 
-void AuthWindow::givePassPtr(Passenger &pass)
-{
+void AuthWindow::givePassPtr(Passenger &pass) {
     passPtr = &pass;
 }
 
-void AuthWindow::giveDBManagerPtr(DataBases *DBPointer)
-{
+void AuthWindow::giveDBManagerPtr(DataBases *DBPointer) {
     DBManagerPtr = DBPointer;
 }
 
-bool AuthWindow::checkFields()
-{
+bool AuthWindow::checkFields() {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Внимание"));
     mBox.setIcon(QMessageBox::Warning);
     mBox.setText(tr("Проверьте введённые данные, пожалуйста"));
-    if(this->getLoginString().isEmpty() || this->getPasswordString().isEmpty())
-    {
+    if (this->getLoginString().isEmpty() || this->getPasswordString().isEmpty()) {
         mBox.exec();
         return false;
     }
-    if(this->getLoginString().length() < 4 || this->getLoginString().length() > 12
-    || this->getPasswordString().length() < 4 || this->getPasswordString().length() > 18)
-    {
+    if (this->getLoginString().length() < 4 || this->getLoginString().length() > 12
+        || this->getPasswordString().length() < 4
+        || this->getPasswordString().length() > 18) {
         mBox.exec();
         return false;
     }
-    if(getLoginString().contains(QRegularExpression("[^a-z0-9]")))
-    {
+    if (getLoginString().contains(QRegularExpression("[^a-z0-9]"))) {
         mBox.exec();
         return false;
     }
@@ -64,8 +56,7 @@ bool AuthWindow::checkFields()
 
 void AuthWindow::creatingRoot()
 {
-    if(DBManagerPtr->loginFound("root"))
-    {
+    if (DBManagerPtr->loginFound("root")) {
         QMessageBox mBox(this);
         mBox.setWindowTitle(tr("Ошибка"));
         mBox.setIcon(QMessageBox::Critical);
@@ -73,15 +64,13 @@ void AuthWindow::creatingRoot()
         mBox.exec();
         doRootReboot();
     }
-    else
-    {
+    else {
      DBManagerPtr->createAdmin("root", "standart#");
      AuthWindow::adminCreatedBox();
     }
 }
 
-void AuthWindow::doRootReboot()
-{
+void AuthWindow::doRootReboot() {
     QMessageBox answerBox(this);
     answerBox.setIcon(QMessageBox::Question);
     answerBox.setWindowTitle("Вопрос");
@@ -89,12 +78,13 @@ void AuthWindow::doRootReboot()
                          "для входа корневого администратора?"));
     answerBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
     answerBox.setDefaultButton(QMessageBox::Yes);
-    if(answerBox.exec() == QMessageBox::Yes)
-    {
+    if (answerBox.exec() == QMessageBox::Yes) {
         User temp;
         DBManagerPtr->find("root", temp);
-        if(temp.getType() == User::idPassenger) DBManagerPtr->destroyPassAndTickets(temp.getID());
-        if(DBManagerPtr->changeUserInfo(temp.getID(), "root", "standart#", User::idAdministrator))
+        if (temp.getType() == User::idPassenger)
+            DBManagerPtr->destroyPassAndTickets(temp.getID());
+        if (DBManagerPtr->changeUserInfo(temp.getID(), "root",
+                                         "standart#", User::idAdministrator))
             rootRebootBox();
     }
 }
@@ -105,21 +95,20 @@ void AuthWindow::accept()
     // Проверка полей на правильность ввода
     if(this->checkFields())
     {
-        if(getLoginString() == "admintools" && getPasswordString() == "30112020")
-        {
+        if (getLoginString() == "admintools" && getPasswordString() == "30112020") {
            creatingRoot();
         }
         else
-        if(DBManagerPtr->find(getLoginString().toStdString(), getPasswordString().toStdString(), *userPtr))
-        {
+        if (DBManagerPtr->find(getLoginString().toStdString(),
+                              getPasswordString().toStdString(), *userPtr)) {
             DBManagerPtr->find(userPtr->getID(), *passPtr);
             QDialog::accept();
         }
-        else
-        {
+        else {
             QMessageBox warning(this);
             warning.setWindowTitle("Ошибка");
-            warning.setText("Не удалось найти пользователя с такой<br> комбинацией логина и пароля");
+            warning.setText("Не удалось найти пользователя с такой<br>"
+                            " комбинацией логина и пароля");
             warning.setIcon(QMessageBox::Critical);
             warning.exec();
         }
@@ -127,8 +116,7 @@ void AuthWindow::accept()
     else return;
 }
 
-void AuthWindow::adminCreatedBox()
-{
+void AuthWindow::adminCreatedBox() {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
@@ -136,35 +124,31 @@ void AuthWindow::adminCreatedBox()
     mBox.exec();
 }
 
-void AuthWindow::rootRebootBox()
-{
+void AuthWindow::rootRebootBox() {
     QMessageBox mBox(this);
     mBox.setWindowTitle(tr("Успех"));
     mBox.setIcon(QMessageBox::Information);
-    mBox.setText(tr("Параметры входа корневого администратора<br> были сброшены: root, standart#"));
+    mBox.setText(tr("Параметры входа корневого администратора<br>"
+                    " были сброшены: root, standart#"));
     mBox.exec();
 }
 
-void AuthWindow::reject()
-{
+void AuthWindow::reject() {
     *authWindowClosed = true;
     QDialog::reject();
 }
 
-void AuthWindow::registry()
-{
+void AuthWindow::registry() {
     RegistryWindow regWindow;
     regWindow.setWindowTitle(tr("Регистрация"));
     regWindow.giveDBPtr(DBManagerPtr);
     regWindow.exec();
 }
 
-QString AuthWindow::getLoginString()
-{
+QString AuthWindow::getLoginString() {
     return this->ui->loginField->text();
 }
 
-QString AuthWindow::getPasswordString()
-{
+QString AuthWindow::getPasswordString() {
     return this->ui->passwordField->text();
 }

@@ -18,31 +18,27 @@ UsersViewWindow::~UsersViewWindow()
     delete ui;
 }
 
-void UsersViewWindow::giveDBManagerPtr(DataBases *DBPointer)
-{
+void UsersViewWindow::giveDBManagerPtr(DataBases *DBPointer) {
     DBManagerPtr = DBPointer;
 }
 
-void UsersViewWindow::giveListPtr(QList<User> *sUserListPtr)
-{
+void UsersViewWindow::giveListPtr(QList<User> *sUserListPtr) {
     userListPtr = sUserListPtr;
 }
 
-void UsersViewWindow::refreshListPtr()
-{
+void UsersViewWindow::refreshListPtr() {
     usersToShow = *userListPtr;
 }
 
-void UsersViewWindow::fillTable(bool def)
-{
-    if(def) refreshListPtr();
+void UsersViewWindow::fillTable(bool def) {
+    if (def)
+        refreshListPtr();
     table->setColumnCount(3);
     table->setRowCount(usersToShow.size());
     QModelIndex index;
     QStringList collsName = {"ID", "Login", "Type"};
     table->setHorizontalHeaderLabels(collsName);
-    for(int row = 0; row < table->rowCount(); row++)
-    {
+    for (int row = 0; row < table->rowCount(); row++) {
         index = table->index(row, 0);
         table->setData(index, usersToShow[row].getID());
         index = table->index(row, 1);
@@ -52,13 +48,11 @@ void UsersViewWindow::fillTable(bool def)
     }
 }
 
-void UsersViewWindow::giveCurUserPtr(User *curUser)
-{
+void UsersViewWindow::giveCurUserPtr(User *curUser) {
     curUserPtr = curUser;
 }
 
-void UsersViewWindow::editUser(QModelIndex index)
-{
+void UsersViewWindow::editUser(QModelIndex index) {
     int curRowNumber = index.row();
     userChanged = false;
     QModelIndex temp = table->index(curRowNumber, 0);
@@ -72,8 +66,7 @@ void UsersViewWindow::editUser(QModelIndex index)
     editUserWindow.giveBoolPtr(&userChanged);
     editUserWindow.setFields();
     editUserWindow.exec();
-    if(userChanged)
-    {
+    if (userChanged) {
         string sPassword = userFound.getPassword();
         int sType = userFound.getType();
         DBManagerPtr->changeUserInfo(ID, login.toStdString(), sPassword, sType);
@@ -81,13 +74,12 @@ void UsersViewWindow::editUser(QModelIndex index)
     }
 }
 
-void UsersViewWindow::startFilter(QString typeFilter)
-{
+void UsersViewWindow::startFilter(QString typeFilter) {
     usersToShow.clear();
-    for(int i = 0; i < (int) userListPtr->size(); i++)
-    {
+    for (int i = 0; i < (int) userListPtr->size(); i++) {
         User temp = userListPtr->at(i);
-        if(temp.getTypeStringRus() == typeFilter || typeFilter == "Выберите...")
+        if (temp.getTypeStringRus() == typeFilter
+            || typeFilter == "Выберите...")
             usersToShow.push_back(temp);
     }
     fillTable(0);

@@ -18,33 +18,27 @@ class ManageRoutesWindow : public QWidget
 public:
     explicit ManageRoutesWindow(QWidget *parent = nullptr);
     ~ManageRoutesWindow();
-
     void giveDBPtr(DataBases *DBPtr);
 
 private slots:
-
     void deleteRoute();
     void createRoute();
     void reactToCheck();
 
 private:
     enum{creating, deleting};
-
     void setShowMode(bool);
     void gracBox(int);
     void existensBox(int);
     void warnBox();
     void critBox();
     bool checkFields(int);
-
     bool checkIDEdit();
     bool checkDepDesEdits();
     bool checkMarkEdit();
     bool checkSeatsEdit();
     DataBases *DBManagePtr;
-
     Route foundRoute;
-
     Ui::ManageRoutesWindow *ui;
 };
 

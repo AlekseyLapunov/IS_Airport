@@ -22,7 +22,6 @@ class PassesViewWindow : public QDialog
 public:
     explicit PassesViewWindow(QWidget *parent = nullptr);
     ~PassesViewWindow();
-
     void giveDBManagerPtr(DataBases *DBPointer);
     void giveListPtr(QList<Passenger> *sPassListPtr);
     void fillTable(bool def = 1);
@@ -32,19 +31,14 @@ private slots:
     void startFilter();
 
 private:
+    void refreshListPtr();
     DataBases *DBManagerPtr;
-
     QList<Passenger> passesToShow;
     QList<Passenger> *passesListPtr;
-
-    void refreshListPtr();
-
     Passenger passFound;
     bool passChanged;
-
     EditPassWindow editPassWindow;
     QStandardItemModel *table;
-
     Ui::PassesViewWindow *ui;
 
 };
